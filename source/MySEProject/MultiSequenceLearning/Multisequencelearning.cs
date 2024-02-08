@@ -23,7 +23,7 @@ namespace MultiSequenceLearning
             {
                 Console.WriteLine("MultiSequence Project starting.....");
                 Console.WriteLine("In this Project we have 3 senarios");
-                Console.WriteLine("1. Cancer Prediction\n2. Power Consumption\n3.Stocks Prediction");
+                Console.WriteLine("1. Cancer Prediction\n2. Power Consumption\n3. Stocks Prediction");
             }
             else
             { 
