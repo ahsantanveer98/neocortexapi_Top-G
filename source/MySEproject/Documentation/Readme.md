@@ -67,7 +67,7 @@ public class MultiSequenceLearning
 
         return RunExperiment(inputBits, cfg, encoder, sequences);
 
-        Continue reading and understanding above code
+        Continue reading and understanding above code which is in C#
 
         Sequence
         Sequence class is used to manage database fields of type sequence.
