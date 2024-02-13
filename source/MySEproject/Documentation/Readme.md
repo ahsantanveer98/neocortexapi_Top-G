@@ -83,3 +83,21 @@ public class MultiSequenceLearning
         Data = data;
     }
 }
+Read sequence is read the SEquence from file.it could be training or testing Sequence.
+
+int count = 1; //Defining the count for sequence Numbering
+                while (!reader.EndOfStream)
+                {
+                    try
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',', ' ');
+                        foreach (var value in values)
+                        {
+                            sequence.Add(Convert.ToDouble(value));
+                        }
+                        string seqName = "seq" + count;
+                        sequences.Add(seqName, sequence);
+                        count++;
+                        
+                    }
