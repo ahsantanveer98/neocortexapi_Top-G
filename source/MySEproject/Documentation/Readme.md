@@ -47,6 +47,8 @@ public class MultiSequenceLearning
             PredictedSegmentDecrement = 0.1
         };
 
+        Encoding
+
         double max = 40;
 
         Dictionary<string, object> settings = new Dictionary<string, object>()
@@ -64,3 +66,38 @@ public class MultiSequenceLearning
         EncoderBase encoder = new ScalarEncoder(settings);
 
         return RunExperiment(inputBits, cfg, encoder, sequences);
+
+        Continue reading and understanding above code which is in C#
+
+        Sequence
+        Sequence class is used to manage database fields of type sequence.
+        
+        public class Sequence
+{
+    public string Name { get; set; }
+    public int[] Data { get; set; }
+
+    public Sequence(string name, int[] data)
+    {
+        Name = name;
+        Data = data;
+    }
+}
+Read sequence is read the SEquence from file.it could be training or testing Sequence.
+
+int count = 1; //Defining the count for sequence Numbering
+                while (!reader.EndOfStream)
+                {
+                    try
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',', ' ');
+                        foreach (var value in values)
+                        {
+                            sequence.Add(Convert.ToDouble(value));
+                        }
+                        string seqName = "seq" + count;
+                        sequences.Add(seqName, sequence);
+                        count++;
+                        
+                    }
