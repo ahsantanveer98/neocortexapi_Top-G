@@ -101,3 +101,20 @@ int count = 1; //Defining the count for sequence Numbering
                         count++;
                         
                     }
+
+            CreateSequence
+                    using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a sequence of integers from 1 to 10
+        IEnumerable<int> sequence = GenerateSequence(1, 10);
+
+        // Print the sequence
+        foreach (int number in sequence)
+        {
+            Console.WriteLine(number);
+        }
+    }
