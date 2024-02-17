@@ -1,1 +1,1 @@
-Studying HTM in detail
+Understanding HTM code
