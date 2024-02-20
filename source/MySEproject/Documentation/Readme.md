@@ -103,7 +103,7 @@ int count = 1; //Defining the count for sequence Numbering
                     }
 
             CreateSequence
-                    using System;
+using System;
 
 class Program
 {
