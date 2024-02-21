@@ -16,6 +16,7 @@
 		<None Remove="GridCellModelTwistedTorous\AlternateImplementation\" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="DotNetActors" Version="1.0.3" />
 		<PackageReference Include="NumSharp" Version="0.30.0" />
 		<PackageReference Include="ScottPlot" Version="4.1.57" />
 	</ItemGroup>
