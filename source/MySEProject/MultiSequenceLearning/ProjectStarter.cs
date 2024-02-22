@@ -22,7 +22,7 @@ namespace ProjectMultiSequenceLearning
         public static void startingproject()
         {
             Console.WriteLine("\n");
-            // Set the Foreground color to blue
+            // Set the Foreground color to White
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("######## ########    ###    ##     ##    ########   ####     #########             ######    ");
             Console.WriteLine("   ##    ##         ## ##   ###   ###       ##     ##  ##    ##      ##           ##         ");
@@ -34,7 +34,7 @@ namespace ProjectMultiSequenceLearning
 
             Console.WriteLine("\n\n\n");
 
-            // Set the Foreground color to blue
+            // Set the Foreground color to Yellow
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
             Console.WriteLine("**************          Multi Sequence Learning Project              ************** \n ");
@@ -45,7 +45,7 @@ namespace ProjectMultiSequenceLearning
             Console.WriteLine("\n");
             Console.WriteLine("Please Enter A Project Number to Continue with MultiSequence Experiment");
 
-            // Set the Foreground color to blue
+            // Set the Foreground color to White
             Console.ForegroundColor = ConsoleColor.White;
         }
 
