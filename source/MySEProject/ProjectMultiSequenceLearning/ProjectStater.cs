@@ -11,7 +11,7 @@ namespace ProjectMultiSequenceLearning
         /// <summary>
         /// Training File Paths For Images and Sequences
         /// </summary>
-        /// comments
+        ///
 
 
 
