@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="..\GridCell\GridCell.csproj" />
     <ProjectReference Include="..\HtmActorHost\HtmActorHost.csproj" />
     <ProjectReference Include="..\ImageEncoder\HtmImageEncoder.csproj" />
@@ -22,6 +23,22 @@
     <ProjectReference Include="..\Samples\NeoCortexApiSample\NeoCortexApiSample.csproj" />
     <ProjectReference Include="..\UnitTestsProject\UnitTestsProject.csproj" />
     <ProjectReference Include="..\WebSocketNeuroVisualizer\WebSocketNeuroVisualizer.csproj" />
+=======
+    <ProjectReference Include="..\..\GridCell\GridCell.csproj" />
+    <ProjectReference Include="..\..\HtmActorHost\HtmActorHost.csproj" />
+    <ProjectReference Include="..\..\ImageEncoder\HtmImageEncoder.csproj" />
+    <ProjectReference Include="..\..\NeoCortexApi.Experiments\NeoCortexApi.Experiments.csproj" />
+    <ProjectReference Include="..\..\NeoCortexApi.Parallel\NeoCortexApi.Parallel.csproj" />
+    <ProjectReference Include="..\..\NeoCortexApi\NeoCortexApi.csproj" />
+    <ProjectReference Include="..\..\NeoCortexArrayLib\NeoCortexArrayLib.csproj" />
+    <ProjectReference Include="..\..\NeoCortexEntities\NeoCortexEntities.csproj" />
+    <ProjectReference Include="..\..\NeoCortexUtils\NeoCortexUtils.csproj" />
+    <ProjectReference Include="..\..\Samples\NeoCortexApiAnomaly\NeoCortexApiAnomaly.csproj" />
+    <ProjectReference Include="..\..\Samples\NeoCortexApiPersistenceSample\NeoCortexApiPersistenceSample.csproj" />
+    <ProjectReference Include="..\..\Samples\NeoCortexApiSample\NeoCortexApiSample.csproj" />
+    <ProjectReference Include="..\..\UnitTestsProject\UnitTestsProject.csproj" />
+    <ProjectReference Include="..\..\WebSocketNeuroVisualizer\WebSocketNeuroVisualizer.csproj" />
+>>>>>>> 8afaff327b5a5c48c091de86566fd4d8c42bf778
   </ItemGroup>
 
 </Project>
