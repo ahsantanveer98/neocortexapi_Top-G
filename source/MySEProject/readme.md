@@ -28,9 +28,9 @@ public class MultiSequenceLearning
             PotentialRadius = (int)(0.15 * inputBits),
             //InhibitionRadius = 15,
 
-            //MaxBoost = 10.0,
+            MaxBoost = 10.0,
             //DutyCyclePeriod = 25,
-            //MinPctOverlapDutyCycles = 0.75,
+            MinPctOverlapDutyCycles = 0.75,
             MaxSynapsesPerSegment = (int)(0.02 * numColumns),
 
             ActivationThreshold = 15,
