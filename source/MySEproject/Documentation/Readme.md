@@ -49,7 +49,7 @@ public class MultiSequenceLearning
 
         Encoding
 
-        double max = 40;
+        double max = 50;
 
         Dictionary<string, object> settings = new Dictionary<string, object>()
         {
