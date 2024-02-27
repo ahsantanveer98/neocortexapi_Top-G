@@ -22,8 +22,4 @@ namespace ProjectMultiSequenceLearning
             ProjectStarter.UserSelection(Option);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8afaff327b5a5c48c091de86566fd4d8c42bf778
