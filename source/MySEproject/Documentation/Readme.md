@@ -17,7 +17,7 @@ public class MultiSequenceLearning
     {
         Console.WriteLine($"Hello NeocortexApi! Experiment {nameof(MultiSequenceLearning)}");
 
-        int inputBits = 100;
+        int inputBits = 120;
         int numColumns = 1024;
 
         HtmConfig cfg = new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
