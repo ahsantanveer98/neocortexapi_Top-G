@@ -20,12 +20,12 @@ Understanding Pridiction code.
             {
                 Random = new ThreadSafeRandom(42),
 
-                <!-- CellsPerColumn = 25,
+                CellsPerColumn = 25,
                 GlobalInhibition = true,
                 LocalAreaDensity = -1,
                 NumActiveColumnsPerInhArea = 0.02 * numColumns,
                 PotentialRadius = (int)(0.15 * inputBits),
-                //InhibitionRadius = 15, -->
+                //InhibitionRadius = 15,
 
                 MaxBoost = 10.0,
                 DutyCyclePeriod = 25,
@@ -39,13 +39,9 @@ Understanding Pridiction code.
                 PermanenceDecrement = 0.25,
                 PermanenceIncrement = 0.15,
 
-<<<<<<< HEAD
-        double max = 50;
-=======
                 // Used by punishing of segments.
                 PredictedSegmentDecrement = 0.1
             };
->>>>>>> 5749c1cd7716f85bc33621b8fccdc23b4b8746de
 
             double max = 20;
 
