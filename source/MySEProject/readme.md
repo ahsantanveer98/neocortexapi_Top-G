@@ -3,6 +3,7 @@ Reading literature view to understand Multi sequence learning.
 Tring to run Multisequence code in VS
 understanding this part of code
 studying prediction modeling
+First Class Created
 
 public class MultiSequenceLearning
 {
