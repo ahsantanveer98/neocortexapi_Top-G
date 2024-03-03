@@ -27,8 +27,8 @@ namespace ProjectMultiSequenceLearning
 
             Console.WriteLine("\n\n\n");
 
-            // Set the Foreground color to dark RED
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            // Set the Foreground color to dark Blue
+            Console.ForegroundColor = ConsoleColor.Blue;
 
             Console.WriteLine("**************          Approve Prediction of Multi Sequence Learning               ************** \n ");
             Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction     ************** ");
