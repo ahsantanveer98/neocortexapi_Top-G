@@ -8,5 +8,6 @@ namespace ProjectMultiSequenceLearning
 {
     internal class Class1
     {
+
     }
 }
