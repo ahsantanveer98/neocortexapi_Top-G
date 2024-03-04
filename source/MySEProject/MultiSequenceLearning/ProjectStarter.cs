@@ -9,13 +9,22 @@ namespace ProjectMultiSequenceLearning
     public class ProjectStarter
     {
         /// <summary>
+        /// Training File Paths For Sequences
+        /// </summary>
+        ///
+#pragma warning disable CS8602 //disable the warning 
+        static readonly string CancerTrainingDataFile = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\TrainingData\CancerTrainingData.csv");
+        static readonly string CancerTestingDataFile = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\TestingData\CancerTestingData.csv");
+
+
+        /// <summary>
         /// Print Message During Startup of Program
         /// </summary>
         /// <param name="None"></param>
         public static void startingproject()
         {
             Console.WriteLine("\n");
-            // Set the Foreground color to green
+            // Set the Foreground color to Green
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("######## ########    ###    ##     ##    ########   ####     #########             ######    ");
             Console.WriteLine("   ##    ##         ## ##   ###   ###       ##     ##  ##    ##      ##           ##         ");
@@ -27,7 +36,7 @@ namespace ProjectMultiSequenceLearning
 
             Console.WriteLine("\n\n\n");
 
-            // Set the Foreground color to dark yellow
+            // Set the Foreground color to Yellow
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
             Console.WriteLine("**************          Approve Prediction of Multi Sequence Learning               ************** \n ");
@@ -36,9 +45,9 @@ namespace ProjectMultiSequenceLearning
             Console.WriteLine("**************  Scenario - 3 - Heart_Disease_Prediction      ************** ");
 
             Console.WriteLine("\n");
-            Console.WriteLine("Please Enter a Scenario Number to Continue with MultiSequence Experiment");
+            Console.WriteLine("Please Enter A Scenario Number to Continue with MultiSequence Experiment");
 
-            // Set the Foreground color to white
+            // Set the Foreground color to White
             Console.ForegroundColor = ConsoleColor.White;
         }
 
