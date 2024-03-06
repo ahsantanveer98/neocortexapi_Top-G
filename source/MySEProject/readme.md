@@ -4,6 +4,7 @@ Tring to run Multisequence code in VS
 understanding this part of code
 studying prediction modeling
 First Class Created
+Trying to train the model
 
 public class MultiSequenceLearning
 {
