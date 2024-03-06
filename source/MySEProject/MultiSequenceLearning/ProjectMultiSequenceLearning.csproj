@@ -28,4 +28,9 @@
     <ProjectReference Include="..\..\WebSocketNeuroVisualizer\WebSocketNeuroVisualizer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestingData\" />
+    <Folder Include="TrainingData\" />
+  </ItemGroup>
+
 </Project>
