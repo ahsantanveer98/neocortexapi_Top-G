@@ -61,31 +61,33 @@ namespace ProjectMultiSequenceLearning
             switch (UserInput)
             {
                 case 1:
-                
-                        Console.WriteLine("User Selected MultiSequence Experiment - Cancer_Prediction\n");
-                                     
-                
-                break;
+
+                    Console.WriteLine("User Selected MultiSequence Experiment - Cancer_Prediction\n");
+
+                    var trainingData = CancerPredictionTraining.ReadSequencesDataFromCSV(CancerTrainingDataFile);
+                    var trainingDataProcessed = CancerPredictionTraining.TrainEncodeSequencesFromCSV(trainingData);
+
+                    break;
 
                 case 2:
-                
-                        Console.WriteLine("User Selected MultiSequence Experiment - Power_Prediction\n");
-                                     
-                
-                break;
+
+                    Console.WriteLine("User Selected MultiSequence Experiment - Power_Prediction\n");
+
+
+                    break;
 
                 case 3:
-                
-                        Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");
-                                     
-                
-                break;
+
+                    Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");
+
+
+                    break;
 
                 default:
-                
-                        Console.WriteLine("User Entered Invalid Option");
-                
-                break;
+
+                    Console.WriteLine("User Entered Invalid Option");
+
+                    break;
             }
         }
 
