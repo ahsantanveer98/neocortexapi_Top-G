@@ -81,6 +81,44 @@ namespace ProjectMultiSequenceLearning
             return SequencesCollection;
         }
 
+        /// <summary>
+        ///     Encoding Cancer_Alphabetic Sequences
+        /// </summary>
+        /// <param name="trainingData"></param>
+        /// <returns></returns>
+        /// 
+        public static List<Dictionary<string, int[]>> TrainEncodeSequencesFromCSV(List<Dictionary<string, string>> trainingData)
+        {
+            List<Dictionary<string, int[]>> ListOfEncodedTrainingSDR = new List<Dictionary<string, int[]>>();
 
+            EncoderBase encoder_Alphabets = FetchAlphabetEncoder();
+
+            foreach (var sequence in trainingData)
+            {
+                int keyForUniqueIndex = 0;
+                var tempDictionary = new Dictionary<string, int[]>();
+
+                foreach (var element in sequence)
+                {
+                    keyForUniqueIndex++;
+                    var elementLabel = element.Key + "," + element.Value;
+                    var elementKey = element.Key;
+                    int[] sdr = new int[0];
+                    sdr = sdr.Concat(encoder_Alphabets.Encode(char.ToUpper(element.Key.ElementAt(0)) - 64)).ToArray();
+
+                    if (tempDictionary.ContainsKey(elementLabel))
+                    {
+                        var newKey = elementLabel + "," + keyForUniqueIndex;
+                        tempDictionary.Add(newKey, sdr);
+                    }
+                    else
+                    {
+                        tempDictionary.Add(elementLabel, sdr);
+                    }
+                }
+                ListOfEncodedTrainingSDR.Add(tempDictionary);
+            }
+            return ListOfEncodedTrainingSDR;
+        }
     }
 }
