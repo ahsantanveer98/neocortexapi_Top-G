@@ -120,5 +120,25 @@ namespace ProjectMultiSequenceLearning
             }
             return ListOfEncodedTrainingSDR;
         }
+
+        /// <summary>
+        ///         FetchAlphabetEncoder 
+        /// </summary>
+        /// <returns> SCALAR ENCODERS</returns>
+        public static EncoderBase FetchAlphabetEncoder()
+        {
+            EncoderBase AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
+                {
+                    { "W", 5},
+                    { "N", 31},
+                    { "Radius", -1.0},
+                    { "MinVal", (double)1},
+                    { "Periodic", true},
+                    { "Name", "scalar"},
+                    { "ClipInput", false},
+                    { "MaxVal", (double)27}
+                });
+            return AlphabetEncoder;
+        }
     }
 }
