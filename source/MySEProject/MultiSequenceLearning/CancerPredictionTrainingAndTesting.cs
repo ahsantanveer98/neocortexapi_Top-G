@@ -30,7 +30,7 @@ using SkiaSharp;
 
 namespace ProjectMultiSequenceLearning
 {
-    public class CancerPredictionTraining
+    public class CancerPredictionTrainingAndTesting
     {
         /// <summary>
         ///     Fetch Data Sequence from the File 
@@ -139,6 +139,44 @@ namespace ProjectMultiSequenceLearning
                     { "MaxVal", (double)27}
                 });
             return AlphabetEncoder;
+        }
+
+        /// <summary>
+        /// HTM Config for creating Connections
+        /// </summary>
+        /// <param name="inputBits">input bits</param>
+        /// <param name="numColumns">number of columns</param>
+        /// <returns>Object of HTMConfig</returns>
+        public static HtmConfig FetchHTMConfig(int inputBits, int numColumns)
+        {
+            HtmConfig cfg = new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
+            {
+                Random = new ThreadSafeRandom(42),
+
+                CellsPerColumn = 25,
+                GlobalInhibition = true,
+                LocalAreaDensity = -1,
+                NumActiveColumnsPerInhArea = 0.02 * numColumns,
+                PotentialRadius = 65, /*(int)(0.15 * inputBits),*/
+                InhibitionRadius = 15,
+
+                MaxBoost = 10.0,
+                DutyCyclePeriod = 25,
+                MinPctOverlapDutyCycles = 0.75,
+                MaxSynapsesPerSegment = 128, /*(int)(0.02 * numColumns),*/
+
+                ActivationThreshold = 15,
+                ConnectedPermanence = 0.5,
+
+                // Learning is slower than forgetting in this case.
+                PermanenceDecrement = 0.25,
+                PermanenceIncrement = 0.15,
+
+                // Used by punishing of segments.
+                PredictedSegmentDecrement = 0.1,
+            };
+
+            return cfg;
         }
     }
 }
