@@ -69,6 +69,8 @@ namespace ProjectMultiSequenceLearning
 
                     Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");
 
+                    var trainingData = HeartDiseasePredictionTraining.ReadSequencesDataFromCSV(HeartDiseaseTrainingDataFile);
+                    var trainingDataProcessed = HeartDiseasePredictionTraining.TrainEncodeSequencesFromCSV(trainingData);
 
                     break;
 
@@ -82,4 +84,3 @@ namespace ProjectMultiSequenceLearning
 
     }
 }
-    
