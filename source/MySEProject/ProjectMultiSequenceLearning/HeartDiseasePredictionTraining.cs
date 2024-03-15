@@ -19,7 +19,6 @@ using Daenet.ImageBinarizerLib.Entities;
 using Daenet.ImageBinarizerLib;
 using Newtonsoft.Json;
 using SkiaSharp;
-
 namespace ProjectMultiSequenceLearning
 {
     public class HeartDiseasePredictionTraining
@@ -150,32 +149,50 @@ namespace ProjectMultiSequenceLearning
 
 
         /// <summary>
+
         ///         FetchAlphabetEncoder 
+
         /// </summary>
+
         /// <returns> SCALAR ENCODERS</returns>
-        public static ScalarEncoder FetchAlphabetEncoder()
+
+        public static EncoderBase FetchAlphabetEncoder()
+
         {
-            ScalarEncoder AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
+
+            EncoderBase AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
+
                 {
+
                     { "W", 5},
+
                     { "N", 31},
+
                     { "Radius", -1.0},
+
                     { "MinVal", (double)1},
+
                     { "Periodic", true},
+
                     { "Name", "scalar"},
+
                     { "ClipInput", false},
+
                     { "MaxVal", (double)27}
+
                 });
+
             return AlphabetEncoder;
+
         }
 
 
 
-        /// <summary>
-        /// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for Alphabets.
-        /// </summary>
-        /// <param name="datafilepath"></param>
-        public void MultiSequenceLearning_Alphabets(string datafilepath)
+/// <summary>
+/// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for Alphabets.
+/// </summary>
+/// <param name="datafilepath"></param>
+public void MultiSequenceLearning_Alphabets(string datafilepath)
         {
             var trainingData = HelperMethod_Alphabets.ReadSequencesDataFromCSV(datafilepath);
             var trainingDataProcessed = HelperMethod_Alphabets.TrainEncodeSequencesFromCSV(trainingData);
