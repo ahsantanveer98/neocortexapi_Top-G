@@ -23,6 +23,7 @@ using SkiaSharp;
 namespace ProjectMultiSequenceLearning
 {
     public class CancerPredictionTraining
+    public class CancerPredictionTrainingAndTesting
     {
         /// <summary>
         ///     Fetch Data Sequence from the File 
@@ -67,9 +68,8 @@ namespace ProjectMultiSequenceLearning
             }
             return SequencesCollection;
         }
-
         /// <summary>
-        ///     Encoding Alphabetic Sequences
+        ///     Encoding Cancer_Alphabetic Sequences
         /// </summary>
         /// <param name="trainingData"></param>
         /// <returns></returns>
@@ -77,14 +77,11 @@ namespace ProjectMultiSequenceLearning
         public static List<Dictionary<string, int[]>> TrainEncodeSequencesFromCSV(List<Dictionary<string, string>> trainingData)
         {
             List<Dictionary<string, int[]>> ListOfEncodedTrainingSDR = new List<Dictionary<string, int[]>>();
-
-            ScalarEncoder encoder_Alphabets = FetchAlphabetEncoder();
-
+            EncoderBase encoder_Alphabets = FetchAlphabetEncoder();
             foreach (var sequence in trainingData)
             {
                 int keyForUniqueIndex = 0;
                 var tempDictionary = new Dictionary<string, int[]>();
-
                 foreach (var element in sequence)
                 {
                     keyForUniqueIndex++;
@@ -92,7 +89,6 @@ namespace ProjectMultiSequenceLearning
                     var elementKey = element.Key;
                     int[] sdr = new int[0];
                     sdr = sdr.Concat(encoder_Alphabets.Encode(char.ToUpper(element.Key.ElementAt(0)) - 64)).ToArray();
-
                     if (tempDictionary.ContainsKey(elementLabel))
                     {
                         var newKey = elementLabel + "," + keyForUniqueIndex;
@@ -107,50 +103,13 @@ namespace ProjectMultiSequenceLearning
             }
             return ListOfEncodedTrainingSDR;
         }
-
-        /// <summary>
-        /// After Alpha Sequence is Learnt, PredictInputSequence will carry out prediction of the Alphabets from the
-        /// Sequence which is read from the sequence (CSV Folder) 
-        /// </summary>
-        /// <param name="list"></param>
-        public static List<int[]> PredictInputSequence(string userInput, Boolean EncodeSingleAlphabet)
-        {
-
-            var alphabetEncoder = FetchAlphabetEncoder();
-
-            var Encoded_Alphabet_SDRs = new List<int[]>();
-            if (!EncodeSingleAlphabet)
-            {
-                if (userInput.Length < 33)
-                {
-                    int remainingLength = 33 - userInput.Length;
-                    for (int i = 0; i < remainingLength; i++)
-                    {
-                        userInput = userInput + "Z";
-                    }
-                }
-
-                foreach (var alphabet in userInput)
-                {
-                    Encoded_Alphabet_SDRs.Add(alphabetEncoder.Encode(char.ToUpper(alphabet) - 64));
-                }
-            }
-            else
-            {
-                Encoded_Alphabet_SDRs.Add(alphabetEncoder.Encode(char.ToUpper(userInput.ElementAt(0)) - 64));
-            }
-
-            return Encoded_Alphabet_SDRs;
-        }
-
-
         /// <summary>
         ///         FetchAlphabetEncoder 
         /// </summary>
         /// <returns> SCALAR ENCODERS</returns>
-        public static ScalarEncoder FetchAlphabetEncoder()
+        public static EncoderBase FetchAlphabetEncoder()
         {
-            ScalarEncoder AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
+            EncoderBase AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
                 {
                     { "W", 5},
                     { "N", 31},
@@ -164,90 +123,42 @@ namespace ProjectMultiSequenceLearning
             return AlphabetEncoder;
         }
 
-
-
         /// <summary>
-        /// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for Alphabets.
+        /// HTM Config for creating Connections
         /// </summary>
-        /// <param name="datafilepath"></param>
-        public void MultiSequenceLearning_Alphabets(string datafilepath)
+        /// <param name="inputBits">input bits</param>
+        /// <param name="numColumns">number of columns</param>
+        /// <returns>Object of HTMConfig</returns>
+        public static HtmConfig FetchHTMConfig(int inputBits, int numColumns)
         {
-            var trainingData = HelperMethod_Alphabets.ReadSequencesDataFromCSV(datafilepath);
-            var trainingDataProcessed = HelperMethod_Alphabets.TrainEncodeSequencesFromCSV(trainingData);
-
-            /// <summary>
-            /// Prototype for building the prediction engine.
-            ///  </summary>
-            MultiSequenceLearning experiment = new MultiSequenceLearning();
-
-            Console.WriteLine("Variables are being trained Please Wait....");
-
-            var trained_HTM_model = experiment.RunAlphabetsLearning(trainingDataProcessed, true);
-            var trained_CortexLayer = trained_HTM_model.Keys.ElementAt(0);
-            var trained_Classifier = trained_HTM_model.Values.ElementAt(0);
-
-            Console.WriteLine("Ready to Predict.....");
-
-            Console.WriteLine("Enter Cancer Sequence:   *note format->AAAAVVV {AlphabeticSequence}");
-            var userInput = Console.ReadLine();
-            while (userInput != null)
+            HtmConfig cfg = new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
             {
-                if ((userInput != "q") && (userInput != "Q"))
-                {
-                    var ElementSDRs = HelperMethod_Alphabets.PredictInputSequence(userInput, false);
-                    List<string> possibleClasses = new List<string>();
+                Random = new ThreadSafeRandom(42),
 
-                    for (int i = 0; i < userInput.Length; i++)
-                    {
+                CellsPerColumn = 25,
+                GlobalInhibition = true,
+                LocalAreaDensity = -1,
+                NumActiveColumnsPerInhArea = 0.02 * numColumns,
+                PotentialRadius = 65, /*(int)(0.15 * inputBits),*/
+                InhibitionRadius = 15,
 
-                        var element = userInput.ElementAt(i);
-                        var elementSDR = HelperMethod_Alphabets.PredictInputSequence(element.ToString(), true);
+                MaxBoost = 10.0,
+                DutyCyclePeriod = 25,
+                MinPctOverlapDutyCycles = 0.75,
+                MaxSynapsesPerSegment = 128, /*(int)(0.02 * numColumns),*/
 
-                        var lyr_Output = trained_CortexLayer.Compute(elementSDR[0], false) as ComputeCycle;
-                        if (lyr_Output != null)
-                        {
-                            var classifierPrediction = trained_Classifier.GetPredictedInputValues(lyr_Output.PredictiveCells.ToArray(), 5);
+                ActivationThreshold = 15,
+                ConnectedPermanence = 0.5,
 
-                            if (classifierPrediction.Count > 0)
-                            {
+                // Learning is slower than forgetting in this case.
+                PermanenceDecrement = 0.25,
+                PermanenceIncrement = 0.15,
 
-                                foreach (var prediction in classifierPrediction)
-                                {
-                                    if (i < userInput.Length - 1)
-                                    {
-                                        var nextElement = userInput.ElementAt(i + 1).ToString();
-                                        var nextElementString = nextElement.Split(",")[0];
-                                        if (prediction.PredictedInput.Split(",")[0] == nextElementString)
-                                        {
-                                            if (prediction.PredictedInput.Split(",").Length == 3)
-                                            {
-                                                {
-                                                    possibleClasses.Add(prediction.PredictedInput.Split(",")[2]);
-                                                }
-                                            }
-                                            else if (prediction.PredictedInput.Split(",")[0] == nextElementString)
-                                            {
-                                                possibleClasses.Add(prediction.PredictedInput.Split(",")[1]);
-                                            }
-                                        }
-                                    }
-                                }
+                // Used by punishing of segments.
+                PredictedSegmentDecrement = 0.1,
+            };
 
-                            }
-                        }
-                    }
-
-                    var Classcounts = possibleClasses.GroupBy(x => x.Split("_")[0])
-                   .Select(g => new { possibleClass = g.Key, Count = g.Count() })
-                   .ToList();
-                    foreach (var class_ in Classcounts)
-                    {
-                        Console.WriteLine($"Predicted Class : {class_.possibleClass.Split("_")[0]} \t votes: {class_.Count}");
-                    }
-                    Console.WriteLine("Enter Next Sequence :");
-                    userInput = Console.ReadLine();
-                }
-            }
+            return cfg;
         }
     }
 }
