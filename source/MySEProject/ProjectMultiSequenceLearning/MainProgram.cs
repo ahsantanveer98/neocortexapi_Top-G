@@ -19,10 +19,8 @@ using Daenet.ImageBinarizerLib.Entities;
 using Daenet.ImageBinarizerLib;
 using Newtonsoft.Json;
 using SkiaSharp;
-
 namespace ProjectMultiSequenceLearning
 {
-    public class CancerPredictionTraining
     public class CancerPredictionTrainingAndTesting
     {
         /// <summary>
@@ -122,7 +120,6 @@ namespace ProjectMultiSequenceLearning
                 });
             return AlphabetEncoder;
         }
-
         /// <summary>
         /// HTM Config for creating Connections
         /// </summary>
@@ -134,31 +131,52 @@ namespace ProjectMultiSequenceLearning
             HtmConfig cfg = new HtmConfig(new int[] { inputBits }, new int[] { numColumns })
             {
                 Random = new ThreadSafeRandom(42),
-
                 CellsPerColumn = 25,
                 GlobalInhibition = true,
                 LocalAreaDensity = -1,
                 NumActiveColumnsPerInhArea = 0.02 * numColumns,
                 PotentialRadius = 65, /*(int)(0.15 * inputBits),*/
                 InhibitionRadius = 15,
-
                 MaxBoost = 10.0,
                 DutyCyclePeriod = 25,
                 MinPctOverlapDutyCycles = 0.75,
                 MaxSynapsesPerSegment = 128, /*(int)(0.02 * numColumns),*/
-
                 ActivationThreshold = 15,
                 ConnectedPermanence = 0.5,
-
                 // Learning is slower than forgetting in this case.
                 PermanenceDecrement = 0.25,
                 PermanenceIncrement = 0.15,
-
                 // Used by punishing of segments.
                 PredictedSegmentDecrement = 0.1,
             };
 
             return cfg;
+        }
+
+        /// <summary>
+        ///     Fetch Testing Data Sequence from the File 
+        /// </summary>
+        /// <param name="dataFilePath"></param>
+        /// <returns></returns>
+        public static List<string> ReadTestingSequencesDataFromCSV(string dataFilePath)
+        {
+            List<string> ListOfTestingSeqData = new List<string>();
+
+            if (File.Exists(dataFilePath))
+            {
+                using (StreamReader sr = new StreamReader(dataFilePath))
+                {
+                    while (sr.Peek() >= 0)
+                    {
+                        var line = sr.ReadLine();
+                        if (line != null)
+                        {
+                            ListOfTestingSeqData.Add(line);
+                        }
+                    }
+                }
+            }
+            return ListOfTestingSeqData;
         }
     }
 }
