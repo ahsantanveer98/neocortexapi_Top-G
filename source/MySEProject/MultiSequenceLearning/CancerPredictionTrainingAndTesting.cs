@@ -178,5 +178,31 @@ namespace ProjectMultiSequenceLearning
 
             return cfg;
         }
+
+        /// <summary>
+        ///     Fetch Testing Data Sequence from the File 
+        /// </summary>
+        /// <param name="dataFilePath"></param>
+        /// <returns></returns>
+        public static List<string> ReadTestingSequencesDataFromCSV(string dataFilePath)
+        {
+            List<string> ListOfTestingSeqData = new List<string>();
+
+            if (File.Exists(dataFilePath))
+            {
+                using (StreamReader sr = new StreamReader(dataFilePath))
+                {
+                    while (sr.Peek() >= 0)
+                    {
+                        var line = sr.ReadLine();
+                        if (line != null)
+                        {
+                            ListOfTestingSeqData.Add(line);
+                        }
+                    }
+                }
+            }
+            return ListOfTestingSeqData;
+        }
     }
 }
