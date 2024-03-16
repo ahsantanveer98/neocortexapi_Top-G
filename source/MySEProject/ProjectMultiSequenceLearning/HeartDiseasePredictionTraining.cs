@@ -73,7 +73,7 @@ namespace ProjectMultiSequenceLearning
         }
 
         /// <summary>
-        ///     Encoding Alphabetic Sequences
+        ///     Encoding HeartDisease Alphabetic Sequences
         /// </summary>
         /// <param name="trainingData"></param>
         /// <returns></returns>
@@ -82,7 +82,7 @@ namespace ProjectMultiSequenceLearning
         {
             List<Dictionary<string, int[]>> ListOfEncodedTrainingSDR = new List<Dictionary<string, int[]>>();
 
-            ScalarEncoder encoder_Alphabets = FetchAlphabetEncoder();
+             encoder_Alphabets = FetchAlphabetEncoder();
 
             foreach (var sequence in trainingData)
             {
@@ -113,7 +113,7 @@ namespace ProjectMultiSequenceLearning
         }
 
         /// <summary>
-        /// After Alpha Sequence is Learnt, PredictInputSequence will carry out prediction of the Alphabets from the
+        /// After Alpha Sequence is Learnt, PredictInputSequence will carry out prediction of the HeartDisease Alphabets from the
         /// Sequence which is read from the sequence (CSV Folder) 
         /// </summary>
         /// <param name="list"></param>
