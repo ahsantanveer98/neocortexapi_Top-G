@@ -149,10 +149,8 @@ namespace ProjectMultiSequenceLearning
                 // Used by punishing of segments.
                 PredictedSegmentDecrement = 0.1,
             };
-
             return cfg;
         }
-
         /// <summary>
         ///     Fetch Testing Data Sequence from the File 
         /// </summary>
@@ -161,7 +159,6 @@ namespace ProjectMultiSequenceLearning
         public static List<string> ReadTestingSequencesDataFromCSV(string dataFilePath)
         {
             List<string> ListOfTestingSeqData = new List<string>();
-
             if (File.Exists(dataFilePath))
             {
                 using (StreamReader sr = new StreamReader(dataFilePath))
@@ -177,6 +174,17 @@ namespace ProjectMultiSequenceLearning
                 }
             }
             return ListOfTestingSeqData;
+        }
+
+        /// <summary>
+        ///     Fetch Testing Data Sequence from the File 
+        /// </summary>
+        /// <param name="testingAlphabet"></param>
+        /// <returns></returns>
+        public static int[] PredictTestingSequence(string testingAlphabet)
+        {
+            EncoderBase alphabetEncoder = FetchAlphabetEncoder();
+            return alphabetEncoder.Encode(char.ToUpper(testingAlphabet.ElementAt(0)) - 64);
         }
     }
 }
