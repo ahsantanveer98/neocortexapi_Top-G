@@ -204,5 +204,16 @@ namespace ProjectMultiSequenceLearning
             }
             return ListOfTestingSeqData;
         }
+
+        /// <summary>
+        ///     Fetch Testing Data Sequence from the File 
+        /// </summary>
+        /// <param name="testingAlphabet"></param>
+        /// <returns></returns>
+        public static int[] PredictTestingSequence(string testingAlphabet)
+        {
+            EncoderBase alphabetEncoder = FetchAlphabetEncoder();
+            return alphabetEncoder.Encode(char.ToUpper(testingAlphabet.ElementAt(0)) - 64);
+        }
     }
 }
