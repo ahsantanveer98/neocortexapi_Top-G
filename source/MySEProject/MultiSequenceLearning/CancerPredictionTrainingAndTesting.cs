@@ -215,5 +215,67 @@ namespace ProjectMultiSequenceLearning
             EncoderBase alphabetEncoder = FetchAlphabetEncoder();
             return alphabetEncoder.Encode(char.ToUpper(testingAlphabet.ElementAt(0)) - 64);
         }
+
+        /// <summary>
+        /// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for Alphabets.
+        /// </summary>
+        /// <param name="datafilepath"></param>
+        public void RunMultiSequenceLearningExperiment(string trainingDataFilePath, string testingDataFilePath)
+        {
+            var trainingData = ReadSequencesDataFromCSV(trainingDataFilePath);
+            var trainingDataProcessed = TrainEncodeSequencesFromCSV(trainingData);
+
+
+            Console.WriteLine("Variables are being trained Please Wait....");
+            /// <summary>
+            /// Prototype for building the prediction engine.
+            ///  </summary>
+            MultiSequenceLearning experiment = new MultiSequenceLearning();
+            //var trained_HTM_model = experiment.Run(trainingDataProcessed);
+            var predictor = experiment.Run(trainingDataProcessed);
+
+            //var trained_HTM_model = experiment.Run(trainingDataProcessed);
+            //var trained_CortexLayer = trained_HTM_model.Keys.ElementAt(0);
+            //var trained_Classifier = trained_HTM_model.Values.ElementAt(0);
+
+            Console.WriteLine("Ready to Predict.....");
+            var testingData = ReadTestingSequencesDataFromCSV(testingDataFilePath);
+
+            //List<Report> reports = new List<Report>();
+            //Report report = new Report();
+            foreach (var seqData in testingData)
+            {
+
+                Console.WriteLine($"Sequence {seqData}");
+                var accuracy = PredictElementAccuracy(predictor, seqData);
+                Console.WriteLine($"Accuracy {accuracy}");
+                //Console.WriteLine($"Predicted Class : {predictedSequence.possibleClass.Split("_")[0]}, accuracy: {accuracy}");
+            }
+
+
+
+
+            //int rowNumber = 0;
+            //foreach (var rowData in testingData)
+            //{
+            //    int count = 0;
+            //    rowNumber++;
+            //    foreach (var item in rowData)
+            //    {
+            //        count++;
+            //        report.SequenceName = $"Row Data {rowNumber} Alpabat Index {count}";
+            //        Debug.WriteLine($"Using test sequence: Row Data {rowNumber} Alpabat Index {count}");
+            //        Console.WriteLine("------------------------------");
+            //        Console.WriteLine($"Using test sequence: Row Data {rowNumber} Alpabat Index {count}");
+            //        //predictor.Reset();
+            //        report.SequenceData = item;
+            //        //var accuracy = PredictNextElement(predictor, item, report);
+            //        //reports.Add(report);
+            //        //Console.WriteLine($"Accuracy for Row Data {rowNumber} Alpabat Index {count} sequence: {accuracy}%");
+            //    }
+            //}
+
+            //var TestAllRep = reports;
+        }
     }
 }
