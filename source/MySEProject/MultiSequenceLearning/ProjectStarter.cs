@@ -13,9 +13,15 @@ namespace ProjectMultiSequenceLearning
         /// </summary>
         ///
 #pragma warning disable CS8602 //disable the warning 
-        static readonly string CancerTrainingDataFile = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\TrainingData\CancerTrainingData.csv");
-        static readonly string CancerTestingDataFile = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\TestingData\CancerTestingData.csv");
+        static readonly string FilePath = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName);
 
+        static readonly string CancerTrainingDataFile = FilePath + @"\TrainingData\CancerTrainingData.csv";
+        static readonly string HeartDiseaseTrainingDataFile = FilePath + @"\TrainingData\HeartDiseaseTrainingData.csv";
+        static readonly string PowerConsumptionTrainingDataFile = FilePath + @"\TrainingData\PowerTrainingData.csv";
+
+        static readonly string CancerTestingDataFile = FilePath + @"\TestingData\CancerTestingData.csv";
+        static readonly string HeartDiseaseTestingDataFile = FilePath + @"\TestingData\HeartDiseaseTestingData.csv";
+        static readonly string PowerConsumptionTestingDataFile = FilePath + @"\TestingData\PowerTestingData.csv";
 
         /// <summary>
         /// Print Message During Startup of Program
@@ -61,27 +67,20 @@ namespace ProjectMultiSequenceLearning
             switch (UserInput)
             {
                 case 1:
-
                     Console.WriteLine("User Selected MultiSequence Experiment - Cancer_Prediction\n");
-
-                    var trainingData = CancerPredictionTrainingAndTesting.ReadSequencesDataFromCSV(CancerTrainingDataFile);
-                    var trainingDataProcessed = CancerPredictionTrainingAndTesting.TrainEncodeSequencesFromCSV(trainingData);
-
-                break;
-
+                    CancerPredictionTrainingAndTesting cancerPrediction = new CancerPredictionTrainingAndTesting();
+                    cancerPrediction.RunMultiSequenceLearningExperiment(userInput, CancerTrainingDataFile, CancerTestingDataFile);
+                    break;
                 case 2:
-
-                    Console.WriteLine("User Selected MultiSequence Experiment - Power_Prediction\n");
-
-
-                break;
-
+                    Console.WriteLine("User Selected MultiSequence Experiment - Power_Consumption_Prediction\n");
+                    //PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
+                    //powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
+                    break;
                 case 3:
-
                     Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");
-
-
-                break;
+                   // HeartDiseasePredictionTrainingAndTesting heartDiseasePrediction = new HeartDiseasePredictionTrainingAndTesting();
+                    //heartDiseasePrediction.RunMultiSequenceLearningExperiment(userInput, HeartDiseaseTrainingDataFile, HeartDiseaseTestingDataFile);
+                    break;
 
                 default:
 

@@ -64,30 +64,6 @@ namespace ProjectMultiSequenceLearning
             }
             Console.WriteLine("------------------------------");
 
-
-
-
-            //int rowNumber = 0;
-            //foreach (var rowData in testingData)
-            //{
-            //    int count = 0;
-            //    rowNumber++;
-            //    foreach (var item in rowData)
-            //    {
-            //        count++;
-            //        report.SequenceName = $"Row Data {rowNumber} Alpabat Index {count}";
-            //        Debug.WriteLine($"Using test sequence: Row Data {rowNumber} Alpabat Index {count}");
-            //        Console.WriteLine("------------------------------");
-            //        Console.WriteLine($"Using test sequence: Row Data {rowNumber} Alpabat Index {count}");
-            //        //predictor.Reset();
-            //        report.SequenceData = item;
-            //        //var accuracy = PredictNextElement(predictor, item, report);
-            //        //reports.Add(report);
-            //        //Console.WriteLine($"Accuracy for Row Data {rowNumber} Alpabat Index {count} sequence: {accuracy}%");
-            //    }
-            //}
-
-            //var TestAllRep = reports;
         }
 
         /// <summary>
