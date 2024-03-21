@@ -24,7 +24,7 @@ namespace ProjectMultiSequenceLearning
     public class HeartDiseasePredictionTraining
     {
         /// <summary>
-        ///     Fetch Data Sequence from the File 
+        ///Fetch Data Sequence from the File
         /// </summary>
         /// <param name="dataFilePath"></param>
         /// <returns></returns>
@@ -68,28 +68,46 @@ namespace ProjectMultiSequenceLearning
         }
 
         /// <summary>
-        ///     Encoding HeartDisease Alphabetic Sequences
+        /// Encoding HeartDisease_Alphabetic_Sequences
         /// </summary>
         /// <param name="trainingData"></param>
         /// <returns></returns>
-	@@ -82,7 +82,7 @@ public class HeartDiseasePredictionTraining
+        public static List<Dictionary<string, int[]>> TrainEncodeSequencesFromCSV(List<Dictionary<string, string>> trainingData)
         {
             List<Dictionary<string, int[]>> ListOfEncodedTrainingSDR = new List<Dictionary<string, int[]>>();
-
-            encoder_Alphabets = FetchAlphabetEncoder();
-
+            EncoderBase encoder_Alphabets = FetchAlphabetEncoder();
             foreach (var sequence in trainingData)
             {
-	@@ -113,7 +113,7 @@ public class HeartDiseasePredictionTraining
+                int keyForUniqueIndex = 0;
+                var tempDictionary = new Dictionary<string, int[]>();
+                foreach (var element in sequence)
+                {
+                    keyForUniqueIndex++;
+                    var elementLabel = element.Key + "," + element.Value;
+                    var elementKey = element.Key;
+                    int[] sdr = new int[0];
+                    sdr = sdr.Concat(encoder_Alphabets.Encode(char.ToUpper(element.Key.ElementAt(0)) - 64)).ToArray();
+                    if (tempDictionary.ContainsKey(elementLabel))
+                    {
+                        var newKey = elementLabel + "," + keyForUniqueIndex;
+                        tempDictionary.Add(newKey, sdr);
+                    }
+                    else
+                    {
+                        tempDictionary.Add(elementLabel, sdr);
+                    }
+                }
+                ListOfEncodedTrainingSDR.Add(tempDictionary);
+            }
+            return ListOfEncodedTrainingSDR;
         }
-
-        /// <summary>
-        /// After Alpha Sequence is Learnt, PredictInputSequence will carry out prediction of the HeartDisease Alphabets from the
-        /// Sequence which is read from the sequence (CSV Folder) 
-        /// </summary>
-        /// <param name="list"></param>
-        public static List<int[]> PredictInputSequence(string userInput, Boolean EncodeSingleAlphabet)
-        {
+            /// <summary>
+            /// After Alpha Sequence is Learnt, PredictInputSequence will carry out prediction of the HeartDisease Alphabets from the
+            /// Sequence which is read from the sequence (CSV Folder) 
+            /// </summary>
+            /// <param name="list"></param>
+            public static List<int[]> PredictInputSequence(string userInput, Boolean EncodeSingleAlphabet)
+            {
             var alphabetEncoder = FetchAlphabetEncoder();
             var Encoded_Alphabet_SDRs = new List<int[]>();
             if (!EncodeSingleAlphabet)
@@ -114,13 +132,13 @@ namespace ProjectMultiSequenceLearning
             return Encoded_Alphabet_SDRs;
         }
         /// <summary>
-        ///         FetchAlphabetEncoder 
+        ///FetchAlphabetEncoder 
         /// </summary>
         /// <returns> SCALAR ENCODERS</returns>
         public static EncoderBase FetchAlphabetEncoder()
         {
-            EncoderBase AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
-                {
+               EncoderBase AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
+               { 
                     { "W", 5},
                     { "N", 31},
                     { "Radius", -1.0},
@@ -149,14 +167,14 @@ namespace ProjectMultiSequenceLearning
             var trained_CortexLayer = trained_HTM_model.Keys.ElementAt(0);
             var trained_Classifier = trained_HTM_model.Values.ElementAt(0);
             Console.WriteLine("Ready to Predict.....");
-            Console.WriteLine("Enter HeartDisease Sequence:   *note format->AAAAVVV {AlphabeticSequence}");
+            Console.WriteLine("Enter HeartDisease Sequence:   *note format {AlphabeticSequence}");
             var userInput = Console.ReadLine();
             while (userInput != null)
             {
                 if ((userInput != "q") && (userInput != "Q"))
                 {
-                    var ElementSDRs = HelperMethod_Alphabets.PredictInputSequence(userInput, false);
-                    List<string> possibleClasses = new List<string>();
+                  var ElementSDRs = HelperMethod_Alphabets.PredictInputSequence(userInput, false);
+                  List<string> possibleClasses = new List<string>();
                     for (int i = 0; i < userInput.Length; i++)
                     {
                         var element = userInput.ElementAt(i);
@@ -240,10 +258,6 @@ namespace ProjectMultiSequenceLearning
                     Console.WriteLine($"Accuracy {accuracy}");
                     //Console.WriteLine($"Predicted Class : {predictedSequence.possibleClass.Split("_")[0]}, accuracy: {accuracy}");
                 }
-
-
-
-
                 //int rowNumber = 0;
                 //foreach (var rowData in testingData)
                 //{
@@ -268,3 +282,4 @@ namespace ProjectMultiSequenceLearning
             }
         }
     }
+}
