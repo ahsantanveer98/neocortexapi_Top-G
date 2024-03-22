@@ -21,50 +21,38 @@ using Newtonsoft.Json;
 using SkiaSharp;
 namespace ProjectMultiSequenceLearning
 {
-    public class HeartDiseasePredictionTraining
+    public class HeartDiseasePredictionTrainingAndTesting
     {
         /// <summary>
-        ///Fetch Data Sequence from the File
+        /// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for HeartDisease Scenario.
         /// </summary>
-        /// <param name="dataFilePath"></param>
-        /// <returns></returns>
-        public static List<Dictionary<string, string>> ReadSequencesDataFromCSV(string dataFilePath)
+        /// <param name="predictionScenario"></param>
+        /// <param name="trainingDataFilePath"></param>
+        /// <param name="testingDataFilePath"></param>
+        public void RunMultiSequenceLearningExperiment(int predictionScenario, string trainingDataFilePath, string testingDataFilePath)
         {
-            List<Dictionary<string, string>> SequencesCollection = new List<Dictionary<string, string>>();
-            int keyForUniqueIndexes = 0;
-            if (File.Exists(dataFilePath))
+            var trainingData = Helper.ReadSequencesDataFromCSV(trainingDataFilePath);
+            var encodeTrainingData = Helper.TrainEncodeSequencesFromCSV(trainingData, predictionScenario);
+
+            Console.WriteLine("Variables are being trained Please Wait....");
+            /// <summary>
+            /// Prototype for building the prediction engine.
+            ///  </summary>
+            MultiSequenceLearning experiment = new MultiSequenceLearning();
+            var predictor = experiment.Run(encodeTrainingData);
+
+            Console.WriteLine("Ready to Predict.....");
+            var testingData = Helper.ReadTestingSequencesDataFromCSV(testingDataFilePath);
+
+            foreach (var seqData in testingData)
             {
-                using (StreamReader sr = new StreamReader(dataFilePath))
-                {
-                    while (sr.Peek() >= 0)
-                    {
-                        var line = sr.ReadLine();
-                        if (line != null)
-                        {
-                            string[] values = line.Split("\t");
-                            Dictionary<string, string> Sequence = new Dictionary<string, string>();
-                            string label = values[1];
-                            string sequenceString = values[0];
-                            foreach (var alphabet in sequenceString)
-                            {
-                                keyForUniqueIndexes++;
-                                if (Sequence.ContainsKey(alphabet.ToString()))
-                                {
-                                    var newKey = alphabet.ToString() + "," + keyForUniqueIndexes;
-                                    Sequence.Add(newKey, label);
-                                }
-                                else
-                                {
-                                    Sequence.Add(alphabet.ToString(), label);
-                                }
-                            }
-                            SequencesCollection.Add(Sequence);
-                        }
-                    }
-                }
-                return SequencesCollection;
+                Console.WriteLine("------------------------------");
+                Console.WriteLine($"Sequence {seqData}");
+                predictor.Reset();
+                var accuracy = PredictElementAccuracy(predictor, seqData, predictionScenario);
+                Console.WriteLine($"Accuracy {accuracy}");
             }
-            return SequencesCollection;
+            Console.WriteLine("------------------------------");
         }
 
         /// <summary>
