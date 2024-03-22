@@ -26,6 +26,14 @@ namespace ProjectMultiSequenceLearning
             Console.WriteLine("Ready to Predict.....");
             var testingData = Helper.ReadTestingSequencesDataFromCSV(testingDataFilePath);
 
+            foreach (var seqData in testingData)
+            {
+                Console.WriteLine($"Sequence {seqData}");
+                predictor.Reset();
+                var accuracy = PredictElementAccuracy(predictor, seqData, predictionScenario);
+                Console.WriteLine($"Accuracy {accuracy}");
+            }
+
         }
     }
 }
