@@ -35,6 +35,42 @@ namespace ProjectMultiSequenceLearning
             }
 
         }
+        /// <summary>
+        /// Takes predicted model, subsequence and predict accuracy
+        /// </summary>
+        /// <param name="predictor">Object of Predictor</param>
+        /// <param name="sequenceData">sequence to be tested</param>
+        /// <param name="predictionScenario">Prediction Scenario</param>
+        /// <returns>accuracy of predicting elements in %</returns>
+        private static double PredictElementAccuracy(Predictor predictor, string sequenceData, int predictionScenario)
+        {
+            int matchCount = 0;
+            int predictions = 0;
+            double accuracy = 0.0;
+            char prevSeqItem = ' ';
+            bool first = true;
+
+            List<string> possibleModes = new List<string>();
+            Console.WriteLine("------------------------------");
+
+            foreach (var seqItem in sequenceData)
+            {
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    Console.WriteLine($"Element {prevSeqItem}");
+                    var elementSDR = Helper.EncodeTestingElement(prevSeqItem.ToString(), predictionScenario);
+                    var classifierPredictions = predictor.Predict(elementSDR);
+                    Console.WriteLine($"Classifier Predictions Count {classifierPredictions.Count}");
+
+                }
+            }
+        }
     }
 }
+
+    
 
