@@ -54,76 +54,63 @@ namespace ProjectMultiSequenceLearning
             }
             Console.WriteLine("------------------------------");
         }
-
         /// <summary>
-        /// Encoding HeartDisease_Alphabetic_Sequences
+        /// Takes predicted model, subsequence and predict accuracy
         /// </summary>
-        /// <param name="trainingData"></param>
-        /// <returns></returns>
-        public static List<Dictionary<string, int[]>> TrainEncodeSequencesFromCSV(List<Dictionary<string, string>> trainingData)
+        /// <param name="predictor">Object of Predictor</param>
+        /// <param name="sequenceData">sequence to be tested</param>
+        /// <param name="predictionScenario">Prediction Scenario</param>
+        /// <returns>accuracy of predicting elements in %</returns>
+        private static double PredictElementAccuracy(Predictor predictor, string sequenceData, int predictionScenario)
         {
-            List<Dictionary<string, int[]>> ListOfEncodedTrainingSDR = new List<Dictionary<string, int[]>>();
-            EncoderBase encoder_Alphabets = FetchAlphabetEncoder();
-            foreach (var sequence in trainingData)
+            int matchCount = 0;
+            int predictions = 0;
+            double accuracy = 0.0;
+            char prevSeqItem = ' ';
+            bool first = true;
+
+            List<string> possibleModes = new List<string>();
+            Console.WriteLine("------------------------------");
+
+            foreach (var seqItem in sequenceData)
             {
-                int keyForUniqueIndex = 0;
-                var tempDictionary = new Dictionary<string, int[]>();
-                foreach (var element in sequence)
+                if (first)
                 {
-                    keyForUniqueIndex++;
-                    var elementLabel = element.Key + "," + element.Value;
-                    var elementKey = element.Key;
-                    int[] sdr = new int[0];
-                    sdr = sdr.Concat(encoder_Alphabets.Encode(char.ToUpper(element.Key.ElementAt(0)) - 64)).ToArray();
-                    if (tempDictionary.ContainsKey(elementLabel))
-                    {
-                        var newKey = elementLabel + "," + keyForUniqueIndex;
-                        tempDictionary.Add(newKey, sdr);
-                    }
-                    else
-                    {
-                        tempDictionary.Add(elementLabel, sdr);
-                    }
+                    first = false;
                 }
-                ListOfEncodedTrainingSDR.Add(tempDictionary);
-            }
-            return ListOfEncodedTrainingSDR;
-        }
-            /// <summary>
-            /// After Alpha Sequence is Learnt, PredictInputSequence will carry out prediction of the HeartDisease Alphabets from the
-            /// Sequence which is read from the sequence (CSV Folder) 
-            /// </summary>
-            /// <param name="list"></param>
-            public static List<int[]> PredictInputSequence(string userInput, Boolean EncodeSingleAlphabet)
-            {
-            var alphabetEncoder = FetchAlphabetEncoder();
-            var Encoded_Alphabet_SDRs = new List<int[]>();
-            if (!EncodeSingleAlphabet)
-            {
-                if (userInput.Length < 33)
+                else
                 {
-                    int remainingLength = 33 - userInput.Length;
-                    for (int i = 0; i < remainingLength; i++)
+                    Console.WriteLine($"Element {prevSeqItem}");
+                    var elementSDR = Helper.EncodeTestingElement(prevSeqItem.ToString(), predictionScenario);
+                    var classifierPredictions = predictor.Predict(elementSDR);
+                    // Console.WriteLine($"Classifier Predictions Count {classifierPredictions.Count}");
+
+                    foreach (var cp in classifierPredictions)
                     {
-                        userInput = userInput + "Z";
+                        var prediction = cp.PredictedInput.Split(",");
+                        if (Convert.ToChar(prediction.First()) == seqItem)
+                        {
+                            Console.WriteLine($"Predicted next element: {prediction.First()}");
+                            matchCount++;
+
+                            if (prediction.Length >= 3)
+                            {
+                                possibleModes.Add(prediction[2]);
+                            }
+                            else
+                            {
+                                possibleModes.Add(prediction[1]);
+                            }
+                            break;
+                        }
                     }
+                    predictions++;
                 }
-                foreach (var alphabet in userInput)
-                {
-                    Encoded_Alphabet_SDRs.Add(alphabetEncoder.Encode(char.ToUpper(alphabet) - 64));
-                }
-            }
-            else
-            {
-                Encoded_Alphabet_SDRs.Add(alphabetEncoder.Encode(char.ToUpper(userInput.ElementAt(0)) - 64));
-            }
-            return Encoded_Alphabet_SDRs;
-        }
-        /// <summary>
-        ///FetchAlphabetEncoder 
-        /// </summary>
-        /// <returns> SCALAR ENCODERS</returns>
-        public static EncoderBase FetchAlphabetEncoder()
+                /// <summary>
+                ///FetchAlphabetEncoder 
+                /// </summary>
+                /// <returns> SCALAR ENCODERS</returns>
+                public static EncoderBase FetchAlphabetEncoder()
         {
                EncoderBase AlphabetEncoder = new ScalarEncoder(new Dictionary<string, object>()
                { 
