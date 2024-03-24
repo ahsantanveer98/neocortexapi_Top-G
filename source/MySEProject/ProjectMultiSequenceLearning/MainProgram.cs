@@ -66,6 +66,27 @@ namespace ProjectMultiSequenceLearning
                     var classifierPredictions = predictor.Predict(elementSDR);
                     Console.WriteLine($"Classifier Predictions Count {classifierPredictions.Count}");
 
+                    foreach (var cp in classifierPredictions)
+                    {
+                        var prediction = cp.PredictedInput.Split(",");
+                        if (Convert.ToChar(prediction.First()) == seqItem)
+                        {
+                            Console.WriteLine($"Predicted next element: {prediction.First()}");
+                            matchCount++;
+
+                            if (prediction.Length >= 3)
+                            {
+                                possibleModes.Add(prediction[2]);
+                            }
+                            else
+                            {
+                                possibleModes.Add(prediction[1]);
+                                possibleModes.Add(prediction[1]);
+                            }
+                            break;
+                        }
+                    }
+                    predictions++;
                 }
             }
         }
