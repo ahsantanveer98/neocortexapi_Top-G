@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Testing Data\**" />
+    <Compile Remove="Training Data\**" />
+    <EmbeddedResource Remove="Testing Data\**" />
+    <EmbeddedResource Remove="Training Data\**" />
+    <None Remove="Testing Data\**" />
+    <None Remove="Training Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\GridCell\GridCell.csproj" />
     <ProjectReference Include="..\..\HtmActorHost\HtmActorHost.csproj" />
     <ProjectReference Include="..\..\ImageEncoder\HtmImageEncoder.csproj" />
@@ -22,11 +31,6 @@
     <ProjectReference Include="..\..\Samples\NeoCortexApiSample\NeoCortexApiSample.csproj" />
     <ProjectReference Include="..\..\UnitTestsProject\UnitTestsProject.csproj" />
     <ProjectReference Include="..\..\WebSocketNeuroVisualizer\WebSocketNeuroVisualizer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Testing Data\" />
-    <Folder Include="Training Data\" />
   </ItemGroup>
 
 </Project>
