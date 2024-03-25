@@ -74,13 +74,13 @@ namespace ProjectMultiSequenceLearning
                     break;
                 case 2:
                     Console.WriteLine("User Selected MultiSequence Experiment - Power_Consumption_Prediction\n");
-                   // PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
-                    //powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
+                    PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
+                    powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
                     break;
                 case 3:
                     Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");
-                   // HeartDiseasePredictionTrainingAndTesting heartDiseasePrediction = new HeartDiseasePredictionTrainingAndTesting();
-                    //heartDiseasePrediction.RunMultiSequenceLearningExperiment(userInput, HeartDiseaseTrainingDataFile, HeartDiseaseTestingDataFile);   
+                    HeartDiseasePredictionTrainingAndTesting heartDiseasePrediction = new HeartDiseasePredictionTrainingAndTesting();
+                    heartDiseasePrediction.RunMultiSequenceLearningExperiment(userInput, HeartDiseaseTrainingDataFile, HeartDiseaseTestingDataFile);   
                     break;
                 default:
                     Console.WriteLine("User Entered Invalid Option");
