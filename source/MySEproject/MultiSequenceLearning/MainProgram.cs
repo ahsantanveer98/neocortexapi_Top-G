@@ -8,13 +8,13 @@ namespace ProjectMultiSequenceLearning
 {
     class MainProgram
     {
-        /// <summary>
-        /// Main Program Start
-        /// </summary>
-        /// 
+         /// <summary>
+          /// Main Program Start
+          /// </summary>
+          /// 
         public static void Main(string[] args)
         {
-
+            
             ProjectStarter.startingproject();
 
             int Option = Convert.ToInt16(Console.ReadLine());
@@ -22,8 +22,4 @@ namespace ProjectMultiSequenceLearning
             ProjectStarter.UserSelection(Option);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8afaff327b5a5c48c091de86566fd4d8c42bf778
