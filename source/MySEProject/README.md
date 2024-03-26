@@ -1,8 +1,22 @@
 
            ML-23/24-09 Approved prediction of Multisequence Learning - Team_Top-G
-Senario 1: Cancer Prediction
 
+       Project objective:
+
+                        **The group of students must implement different scenarios (every student one scenario like cancer sequence prediction, power consumption prediction or similar.)**
+                        
+                        The sample implemented in MultisequenceLearning.cs and the method RunMultiSequenceLearningExperiment demonstrates how sequences are learned and then predicted.
+
+                        Your first task is to analyse the existing code and understand how learning sequences and prediction work. Then implement a new method RunPredictionMultiSequenceExperiment, that improves the existing RunMultiSequenceLearningExperiment. The new method should automatically read learning sequences from a file and learn them. After learning is completed, the sample should read testing subsequences from another file and calculate the prediction accuracy.
+
+                        The existing example already works. Your task is to start the learning (RunExperiment method) and then to implement the code which approves your scenario. For example, you learn some sequence of elements and then load inferring samples as subsequences (see how Predictor is used) and then show how next elements are predicted.
+
+
+
+Senario 1: Cancer Prediction
+----------------------------
 Number of files: 
+----------------
 
 1. CancerPredictionTrainingAndTesting.cs
 2. MainProgram.cs
@@ -10,18 +24,24 @@ Number of files:
 4. ProjectStarter.cs
 5. Helper.cs
 
+------------------
 Number Of Folders
+------------------
 
 1. TrainingData
 2. TestingData
 
+------------------------------------------
 Code For File (Training and Testing) Path:
+------------------------------------------
 
+```c#
 static readonly string FilePath = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName);
 static readonly string CancerTrainingDataFile = FilePath + @"\TrainingData\CancerTrainingData.csv";
 static readonly string CancerTestingDataFile = FilePath + @"\TestingData\CancerTestingData.csv";
+```
 
-Rest Coding of the Project in .cs Files
+Rest of the Project Coding is in .cs Files
 
         Scenario 1_ Cancer Prediction **Completed**
 
