@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetActors" Version="1.0.3" />
     <PackageReference Include="ImageBinarizer" Version="1.5.6" />
     <PackageReference Include="IronXL.Excel" Version="2020.12.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />

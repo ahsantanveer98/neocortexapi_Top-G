@@ -53,11 +53,15 @@ namespace NeoCortexApi
         /// </summary>
         /// <param name="input">The element that will cause the next expected element.</param>
         /// <returns>The list of expected (predicting) elements.</returns>
+
         public List<ClassifierResult<string>> Predict(object input)
+
+        public List<ClassifierResult<string>> Predict(object input)
+
         {
             var lyrOut = this.layer.Compute(input, false) as ComputeCycle;
 
-            List<ClassifierResult<string>> predictedInputValues = this.classifier.GetPredictedInputValues(lyrOut.PredictiveCells.ToArray(), 3);
+            List<ClassifierResult<string>> predictedInputValues = this.classifier.GetPredictedInputValues(lyrOut.PredictiveCells.ToArray(), 5);
 
             return predictedInputValues;
         }

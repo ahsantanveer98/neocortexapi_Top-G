@@ -35,6 +35,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<PackageReference Include="DotNetActors" Version="1.0.3" />
 		<PackageReference Include="ImageBinarizer" Version="1.5.6" />
 		<PackageReference Include="NeoCortexApi" Version="1.1.2" />
 	</ItemGroup>
