@@ -1,4 +1,5 @@
 ML-23/24-09 Approved prediction of Multisequence Learning - Team_Top-G
+
 Senario 2: Power Prediction
 
 Number of files: 
@@ -20,6 +21,6 @@ static readonly string FilePath = Path.GetFullPath(Directory.GetParent(Environme
 static readonly string PowerTrainingDataFile = FilePath + @"\TrainingData\PowerTrainingData.csv";
 static readonly string PowerTestingDataFile = FilePath + @"\TestingData\PowerTestingData.csv";
 
-Rest Coding of the Project in .cs Files
+Coding of the Project in .cs Files
 
         Scenario 2_ Power Prediction *Completed*
