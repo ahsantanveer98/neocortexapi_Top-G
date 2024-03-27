@@ -9,7 +9,7 @@ namespace ProjectMultiSequenceLearning
     public class ProjectStarter
     {
         /// <summary>
-        /// Training File Paths For Sequences
+        /// Training and Testing File(s) Path For Sequence(s).
         /// </summary>
         ///
 #pragma warning disable CS8602 //disable the warning 
@@ -28,7 +28,7 @@ namespace ProjectMultiSequenceLearning
         /// Print Message During Startup of Program
         /// </summary>
         /// <param name="None"></param>
-        public static void startingproject()
+        public static void StartingProject()
         {
             Console.WriteLine("\n");
             // Set the Foreground color to blue
@@ -46,9 +46,9 @@ namespace ProjectMultiSequenceLearning
             // Set the Foreground color to blue
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-            Console.WriteLine("**************          Approve Prediction of Multi Sequence Learning               ************** \n ");
-            Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction     ************** ");
-            Console.WriteLine("**************  Scenario - 2 - Power_Consumption_Prediction   ************** ");
+            Console.WriteLine("************   ML-23/24-09   Approve Prediction of Multi Sequence Learning    ************** \n ");
+            Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction             ************** ");
+            Console.WriteLine("**************  Scenario - 2 - Power_Consumption_Prediction  ************** ");
             Console.WriteLine("**************  Scenario - 3 - Heart_Disease_Prediction      ************** ");
 
             Console.WriteLine("\n");
@@ -59,7 +59,7 @@ namespace ProjectMultiSequenceLearning
         }
 
         /// <summary>
-        /// Print Message During Startup of Program
+        /// Run Multi Sequence Learning of user selected Scenario
         /// </summary>
         /// <param name="UserInput"></param>
 
@@ -69,13 +69,13 @@ namespace ProjectMultiSequenceLearning
             {
                 case 1:
                     Console.WriteLine("User Selected MultiSequence Experiment - Cancer_Prediction\n");
-                   // CancerPredictionTrainingAndTesting cancerPrediction = new CancerPredictionTrainingAndTesting();
-                    //cancerPrediction.RunMultiSequenceLearningExperiment(userInput, CancerTrainingDataFile, CancerTestingDataFile);
+                    CancerPredictionTrainingAndTesting cancerPrediction = new CancerPredictionTrainingAndTesting();
+                    cancerPrediction.RunMultiSequenceLearningExperiment(userInput, CancerTrainingDataFile, CancerTestingDataFile);
                     break;
                 case 2:
                     Console.WriteLine("User Selected MultiSequence Experiment - Power_Consumption_Prediction\n");
-                    //PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
-                    //powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
+                    PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
+                    powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
                     break;
                 case 3:
                     Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");

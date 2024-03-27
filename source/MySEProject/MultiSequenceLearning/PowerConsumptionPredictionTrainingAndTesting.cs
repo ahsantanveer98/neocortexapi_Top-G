@@ -1,52 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using NeoCortexApi;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Globalization;
-using System.Drawing;
-
-using NeoCortexApi;
-using NeoCortexApi.Classifiers;
-using NeoCortexApi.Entities;
-using NeoCortexApi.Network;
-using NeoCortexApi.Encoders;
-using NeoCortexApi.Utility;
-using HtmImageEncoder;
-using Daenet.ImageBinarizerLib.Entities;
-using Daenet.ImageBinarizerLib;
-using Newtonsoft.Json;
-using SkiaSharp;
 
 namespace ProjectMultiSequenceLearning
 {
-    public class CancerPredictionTrainingAndTesting
+    public class PowerConsumptionPredictionTrainingAndTesting
     {
         /// <summary>
-        /// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for Cancer Prediction.
+        /// Runs MultiSequence Learning Experiment - To Carry out Sequence Learning for Heart Disease Scenario.
         /// </summary>
         /// <param name="predictionScenario"></param>
         /// <param name="trainingDataFilePath"></param>
         /// <param name="testingDataFilePath"></param>
         public void RunMultiSequenceLearningExperiment(int predictionScenario, string trainingDataFilePath, string testingDataFilePath)
         {
-            //Get Sequence Data from file for training 
-            var trainingData = Helper.ReadSequencesDataFromCSV(trainingDataFilePath);
+            //Get Sequence Data from file for training
+            var trainingData = Helper.ReadSequencesDataFromCSVForPC(trainingDataFilePath);
 
             //Encode Sequence Training Data
-            var trainingDataProcessed = Helper.TrainEncodeSequencesFromCSV(trainingData, predictionScenario);
-
+            var encodeTrainingData = Helper.TrainEncodeSequencesFromCSV(trainingData, predictionScenario);
 
             Console.WriteLine("Variables are being trained Please Wait....");
+
             /// <summary>
             /// Prototype for building the prediction engine.
             ///  </summary>
             MultiSequenceLearning experiment = new MultiSequenceLearning();
-            var predictor = experiment.Run(trainingDataProcessed);
-
+            var predictor = experiment.Run(encodeTrainingData);
 
             Console.WriteLine("Ready to Predict.....");
 
@@ -56,13 +36,11 @@ namespace ProjectMultiSequenceLearning
             //Testing Data Execute Row by Row
             foreach (var seqData in testingData)
             {
-                Console.WriteLine("------------------------------");
                 Console.WriteLine($"Sequence {seqData}");
                 predictor.Reset();
                 var accuracy = PredictElementAccuracy(predictor, seqData, predictionScenario);
                 Console.WriteLine($"Accuracy {accuracy}%");
             }
-            Console.WriteLine("------------------------------");
         }
 
         /// <summary>
@@ -77,29 +55,17 @@ namespace ProjectMultiSequenceLearning
             int matchCount = 0;
             int predictions = 0;
             double accuracy = 0.0;
-            char prevSeqItem = ' ';
+            string prevSeqItem = "";
             bool first = true;
 
             List<string> possibleModes = new List<string>();
-
             Console.WriteLine("------------------------------");
-
-            /*
-             * Pseudo code for calculating accuracy:
-             * 
-             * 1.      loop for each element in the sub-sequence
-             * 1.1     if the element is first element do nothing and save the element as 'previous' for further comparision
-             * 1.2     take previous element and predict the next element
-             * 1.2.1   get the predicted element with highest similarity and compare with 'next' element
-             * 1.2.1.1 if predicted element matches the next element increment the counter of matched elements
-             * 1.2.2   increment the count for number of calls made to predict an element
-             * 1.2     update the 'previous' element with 'next' element
-             * 2.      calculate the accuracy as (number of matched elements)/(total number of calls for prediction) * 100
-             * 3.      end the loop
-             */
+            
+            //split the data by comma
+            var sequenceDataList = sequenceData.Split(",");
 
             //Every Row is Divide into single element for predict next element and calculate accuuracy
-            foreach (var seqItem in sequenceData)
+            foreach (var seqItem in sequenceDataList)
             {
                 if (first)
                 {
@@ -108,24 +74,20 @@ namespace ProjectMultiSequenceLearning
                 else
                 {
                     Console.WriteLine($"Element {prevSeqItem}");
-
-                    //Encode Element of Testing Data
-                    var elementSDR = Helper.EncodeTestingElement(prevSeqItem.ToString(), predictionScenario);
-
-                    //Delary for 1 Sec
+                    var elementSDR = Helper.EncodeTestingElement(prevSeqItem, predictionScenario);
                     Thread.Sleep(1000);
-
-                    //Predict Element using element SDR
                     var classifierPredictions = predictor.Predict(elementSDR);
+                    Console.WriteLine($"Classifier Predictions Count {classifierPredictions.Count}");
+                    
 
-                    //Read classifier Predictions one by one if match then matchCount increase 
                     foreach (var cp in classifierPredictions)
                     {
+                        
+
                         var predictedSequence = cp.PredictedInput.Split('_');
                         var predictedElements = predictedSequence.Last().Split('-');
-                        //Debug.WriteLine($"Predicted Sequence: {predictedSequence.First()}, predicted next element {predictedElements.Last()}");
-
-                        if (Convert.ToChar(predictedElements.Last()) == seqItem)
+                        
+                        if (predictedElements.Last() == seqItem)
                         {
                             Console.WriteLine($"Predicted next element: {predictedElements.Last()}");
                             matchCount++;
@@ -141,8 +103,8 @@ namespace ProjectMultiSequenceLearning
                             }
                             break;
                         }
-                    }
 
+                    }
                     predictions++;
                 }
 
@@ -153,15 +115,14 @@ namespace ProjectMultiSequenceLearning
             #region CalCulate Accuracy and Predict Mode
 
             /*
-             * Accuracy is calculated as number of matching predictions made 
-             * divided by total number of prediction made for an element in subsequence
-             * 
-             * accuracy = number of matching predictions/total number of prediction * 100
-             */
+            * Accuracy is calculated as number of matching predictions made 
+            * divided by total number of prediction made for an element in subsequence
+            * 
+            * accuracy = number of matching predictions/total number of prediction * 100
+            */
 
             accuracy = (double)matchCount / predictions * 100;
             Console.WriteLine("------------------------------");
-            Console.WriteLine($"Sequence {sequenceData}");
 
             //Predict Mode
 
@@ -171,12 +132,11 @@ namespace ProjectMultiSequenceLearning
                    .OrderByDescending(x => x.Count).FirstOrDefault();
 
             if (predictedSequenceMode != null)
-                Console.WriteLine($"Predicted Mode : {predictedSequenceMode.possibleMode}");
+                Console.WriteLine($"Power Consumption : {predictedSequenceMode.possibleMode}");
 
             #endregion
 
             return accuracy;
         }
-
     }
 }
