@@ -14,7 +14,7 @@ In this project, each member of the group implemented different scenarios (scena
 
 ## Implementation
 
-![image](./MultiSequenceLearning/Documentation/Images/overview.png)
+![image](./MultiSequenceLearning/Documentation/Images/Overview.png)
 
 Fig: Architecture of Approve Prediction of Multisequence Learning
 
@@ -345,8 +345,13 @@ Note that prediction code is omitted.
 
 We have run the experiment max possible number of times with different dataset. We have tried to keep the size of dataset small and number of sequences also small due to large time in execution.
 
+## Cancer_Prediction_Result
 ![results](./MultiSequenceLearning/Documentation/Images/Cancer_Prediction_Result.png)
+
+## HeartDisease_Prediction_Result
 ![results](./MultiSequenceLearning/Documentation/Images/HeartDiseasePredictionResult.jpeg)
+
+## PowerConsumption_Prediction_Result
 ![results](./MultiSequenceLearning/Documentation/Images/PowerConsumptionPredictionResult.jpeg)
 
 ## Reference
