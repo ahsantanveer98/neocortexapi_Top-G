@@ -14,7 +14,7 @@ In this project, each member of the group implemented different scenarios (scena
 
 ## Implementation
 
-![image](./Images/overview.png)
+![image](./MultiSequenceLearning/Documentation/Images/overview.png)
 
 Fig: Architecture of Approve Prediction of Multisequence Learning
 
@@ -222,7 +222,7 @@ public static List<string> ReadTestingSequencesDataFromCSV(string dataFilePath)
 
 4. Calculating accuracy in PredictElementAccuracy() in `CancerPredictionTrainingAndTesting.cs`, `PowerConsumptionPredictionTrainingAndTesting.cs` and `HeartDiseasePredictionTrainingAndTesting.cs`
 
-![image](./Images/approve_prediction.png)
+![image](./MultiSequenceLearning/Documentation/Images/approve_prediction.png)
 
 Fig: Prediction and calculating accuracy
 
@@ -345,9 +345,9 @@ Note that prediction code is omitted.
 
 We have run the experiment max possible number of times with different dataset. We have tried to keep the size of dataset small and number of sequences also small due to large time in execution.
 
-![results](./Images/Cancer_Prediction_Result.png)
-![results](./Images/HeartDiseasePredictionResult.jpeg)
-![results](./Images/PowerConsumptionPredictionResult.jpeg)
+![results](./MultiSequenceLearning/Documentation/Images/Cancer_Prediction_Result.png)
+![results](./MultiSequenceLearning/Documentation/Images/HeartDiseasePredictionResult.jpeg)
+![results](./MultiSequenceLearning/Documentation/Images/PowerConsumptionPredictionResult.jpeg)
 
 ## Reference
 
