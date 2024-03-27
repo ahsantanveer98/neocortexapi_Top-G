@@ -56,8 +56,6 @@ namespace NeoCortexApi
 
         public List<ClassifierResult<string>> Predict(object input)
 
-        public List<ClassifierResult<string>> Predict(object input)
-
         {
             var lyrOut = this.layer.Compute(input, false) as ComputeCycle;
 
