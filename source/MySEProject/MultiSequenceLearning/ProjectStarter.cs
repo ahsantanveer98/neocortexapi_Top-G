@@ -12,7 +12,7 @@ namespace ProjectMultiSequenceLearning
         /// Training File Paths For Sequences
         /// </summary>
         ///
-#pragma warning disable CS8602 //disable the warning 
+        #pragmam warning disable CS8602 //disable the warning 
         static readonly string FilePath = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName);
 
         static readonly string CancerTrainingDataFile = FilePath + @"\TrainingData\CancerTrainingData.csv";
