@@ -38,7 +38,7 @@ Code For File (Training and Testing) Path:
 ```c#
 static readonly string FilePath = Path.GetFullPath(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName);
 static readonly string PowerTrainingDataFile = FilePath + @"\TrainingData\PowerTrainingData.csv";
-static readonly string CancerTestingDataFile = FilePath + @"\TestingData\PowerTestingData.csv";
+static readonly string PowerTestingDataFile = FilePath + @"\TestingData\PowerTestingData.csv";
 ```
 
 Rest of the Project Coding is in .cs Files
