@@ -8,13 +8,13 @@ namespace ProjectMultiSequenceLearning
 {
     class MainProgram
     {
-         /// <summary>
-          /// Main Program Start
-          /// </summary>
-          /// 
+        /// <summary>
+        /// Main Program Start
+        /// </summary>
+        /// 
         public static void Main(string[] args)
         {
-            
+
             ProjectStarter.startingproject();
 
             int Option = Convert.ToInt16(Console.ReadLine());
