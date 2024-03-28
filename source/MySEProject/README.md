@@ -28,7 +28,7 @@ List<Dictionary<string, string>> sequencesCollection = new List<Dictionary<strin
 
 ```
 
-**- Training Dataset**
+**Training Dataset**
 
 - Training Dataset in `CSV` of **Senario_1-Cancer Prediction**
 
@@ -59,7 +59,7 @@ List<Dictionary<string, string>> sequencesCollection = new List<Dictionary<strin
 9.  2gbyz9,1
 10. f06u72,1
 
-**- Test Dataset**
+**Test Dataset**
 
 - Testing Dataset in `CSV` of **Senario_1-Cancer Prediction**
 
@@ -80,7 +80,7 @@ List<Dictionary<string, string>> sequencesCollection = new List<Dictionary<strin
 3.  2gby
 
 
-Our implemented methods are in `Helper.cs` and can be found [here](../Helper.cs):
+Our implemented methods are in `Helper.cs` and can be found [here](./MultiSequenceLearning/Helper.cs):
 
 1. FetchHTMConfig()
 
@@ -318,7 +318,7 @@ Note that prediction code is omitted.
 
 ### To create synthetic dataset
 
-1. Open the [sln](../../../NeoCortexApi.sln) and select `ProjectMultiSequenceLearning` as startup project.
+1. Open the [sln](../NeoCortexApi.sln) and select `ProjectMultiSequenceLearning` as startup project.
 
 2. In `MainProgram.cs` we have the `Main()`.
 
@@ -346,12 +346,15 @@ Note that prediction code is omitted.
 We have run the experiment max possible number of times with different dataset. We have tried to keep the size of dataset small and number of sequences also small due to large time in execution.
 
 ## Cancer_Prediction_Result
+
 ![results](./MultiSequenceLearning/Documentation/Images/Cancer_Prediction_Result.png)
 
-## HeartDisease_Prediction_Result
+## Heart_Disease_Prediction_Result
+
 ![results](./MultiSequenceLearning/Documentation/Images/HeartDiseasePredictionResult.jpeg)
 
-## PowerConsumption_Prediction_Result
+## Power_Consumption_Prediction_Result
+
 ![results](./MultiSequenceLearning/Documentation/Images/PowerConsumptionPredictionResult.jpeg)
 
 ## Reference
