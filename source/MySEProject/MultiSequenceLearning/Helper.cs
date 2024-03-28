@@ -20,12 +20,16 @@ namespace ProjectMultiSequenceLearning
                 int keyForUniqueIndexes = 0;
                 List<Dictionary<string, string>> sequencesCollection = new List<Dictionary<string, string>>();
 
+                //check file exist or not 
                 if (File.Exists(dataFilePath))
                 {
+                    //stream reader read file of given path
                     using (StreamReader sr = new StreamReader(dataFilePath))
                     {
+                        //loop for read data from file till last line
                         while (sr.Peek() >= 0)
                         {
+                            //read line one by one
                             var line = sr.ReadLine();
                             if (line != null)
                             {
@@ -35,6 +39,7 @@ namespace ProjectMultiSequenceLearning
                                 string sequenceString = values[0];
                                 string label = values[1];
 
+                                // every element of sequence line save in Dictionary dataset for process and get element SDR
                                 foreach (var element in sequenceString)
                                 {
                                     keyForUniqueIndexes++;
@@ -73,17 +78,20 @@ namespace ProjectMultiSequenceLearning
             List<Dictionary<string, int[]>> ListOfEncodedTrainingSDR = new List<Dictionary<string, int[]>>();
             EncoderBase encoder = FetchEncoder(predictionScenario);
 
+            //Sequence Data line process one by one
             foreach (var sequence in trainingData)
             {
                 int keyForUniqueIndex = 0;
                 var tempDictionary = new Dictionary<string, int[]>();
 
+                // Sequence execute every element one by one
                 foreach (var element in sequence)
                 {
                     keyForUniqueIndex++;
                     var elementLabel = element.Key + "," + element.Value;
                     var elementKey = element.Key;
 
+                    //To Fetch Element SDR
                     int[] sdr;
                     if (predictionScenario == 2)
                         sdr = encoder.Encode(elementKey.Split(',').First());
@@ -106,7 +114,7 @@ namespace ProjectMultiSequenceLearning
         }
 
         /// <summary>
-        ///         FetchEncoder 
+        ///         Fetch Encoder 
         /// </summary>
         /// <returns> SCALAR ENCODERS</returns>
         public static EncoderBase FetchEncoder(int predictionScenario)
@@ -199,12 +207,16 @@ namespace ProjectMultiSequenceLearning
         {
             List<string> testingSeqDataList = new List<string>();
 
+            //
             if (File.Exists(dataFilePath))
             {
+                //
                 using (StreamReader sr = new StreamReader(dataFilePath))
                 {
+                    //
                     while (sr.Peek() >= 0)
                     {
+                        //
                         var line = sr.ReadLine();
                         if (line != null)
                         {
@@ -225,10 +237,10 @@ namespace ProjectMultiSequenceLearning
         public static int[] EncodeTestingElement(string testingElement, int predictionScenario)
         {
             EncoderBase encoder = FetchEncoder(predictionScenario);
-            if (predictionScenario == 2)
+            if (predictionScenario == 2) // for Power Consumption Scenario
                 return encoder.Encode(testingElement);
             else
-                return encoder.Encode((int)char.ToUpper(testingElement.ElementAt(0)));
+                return encoder.Encode((int)char.ToUpper(testingElement.ElementAt(0))); // Element change to upper case then casting wrt preodic table
         }
 
         /// <summary>

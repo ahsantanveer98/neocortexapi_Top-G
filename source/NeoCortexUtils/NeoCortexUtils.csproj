@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetActors" Version="1.0.3" />
     <PackageReference Include="GemBox.Spreadsheet" Version="47.0.1268" />
     <PackageReference Include="ImageBinarizer" Version="1.5.6" />
     <PackageReference Include="System.Drawing.Common" Version="4.6.0-preview3.19128.7" />

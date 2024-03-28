@@ -8,12 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Testing Data\**" />
-    <Compile Remove="Training Data\**" />
-    <EmbeddedResource Remove="Testing Data\**" />
-    <EmbeddedResource Remove="Training Data\**" />
-    <None Remove="Testing Data\**" />
-    <None Remove="Training Data\**" />
+    <PackageReference Include="DotNetActors" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +26,11 @@
     <ProjectReference Include="..\..\Samples\NeoCortexApiSample\NeoCortexApiSample.csproj" />
     <ProjectReference Include="..\..\UnitTestsProject\UnitTestsProject.csproj" />
     <ProjectReference Include="..\..\WebSocketNeuroVisualizer\WebSocketNeuroVisualizer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestingData\" />
+    <Folder Include="TrainingData\" />
   </ItemGroup>
 
 </Project>
