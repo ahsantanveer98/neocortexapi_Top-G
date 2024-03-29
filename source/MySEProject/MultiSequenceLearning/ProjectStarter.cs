@@ -31,7 +31,7 @@ namespace ProjectMultiSequenceLearning
         public static void startingproject()
         {
             Console.WriteLine("\n");
-            // Set the Foreground color to blue
+            // Set the Foreground color to White
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("######## ########    ###    ##     ##    ########   ####     #########             ######    ");
             Console.WriteLine("   ##    ##         ## ##   ###   ###       ##     ##  ##    ##      ##           ##         ");
@@ -43,7 +43,7 @@ namespace ProjectMultiSequenceLearning
 
             Console.WriteLine("\n\n\n");
 
-            // Set the Foreground color to blue
+            // Set the Foreground color to Dark Yellow
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
             Console.WriteLine("**************          Approve Prediction of Multi Sequence Learning               ************** \n ");
@@ -54,7 +54,7 @@ namespace ProjectMultiSequenceLearning
             Console.WriteLine("\n");
             Console.WriteLine("Please Enter A Scenario Number to Continue with MultiSequence Experiment");
 
-            // Set the Foreground color to blue
+            // Set the Foreground color to White
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -74,13 +74,13 @@ namespace ProjectMultiSequenceLearning
                     break;
                 case 2:
                     Console.WriteLine("User Selected MultiSequence Experiment - Power_Consumption_Prediction\n");
-                    //PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
-                    //powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
+                    PowerConsumptionPredictionTrainingAndTesting powerConsumptionPrediction = new PowerConsumptionPredictionTrainingAndTesting();
+                    powerConsumptionPrediction.RunMultiSequenceLearningExperiment(userInput, PowerConsumptionTrainingDataFile, PowerConsumptionTestingDataFile);
                     break;
                 case 3:
                     Console.WriteLine("User Selected MultiSequence Experiment - Heart_Disease_Prediction\n");
-                    //HeartDiseasePredictionTrainingAndTesting heartDiseasePrediction = new HeartDiseasePredictionTrainingAndTesting();
-                    //heartDiseasePrediction.RunMultiSequenceLearningExperiment(userInput, HeartDiseaseTrainingDataFile, HeartDiseaseTestingDataFile);   
+                    HeartDiseasePredictionTrainingAndTesting heartDiseasePrediction = new HeartDiseasePredictionTrainingAndTesting();
+                    heartDiseasePrediction.RunMultiSequenceLearningExperiment(userInput, HeartDiseaseTrainingDataFile, HeartDiseaseTestingDataFile);   
                     break;
                 default:
                     Console.WriteLine("User Entered Invalid Option");
