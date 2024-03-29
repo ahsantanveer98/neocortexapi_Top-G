@@ -29,15 +29,20 @@ namespace ProjectMultiSequenceLearning
         /// <param name="sequences">Dictionary of sequences. KEY is the sequence name, the VALUE is th elist of element of the sequence.</param>
         public Predictor Run(List<Dictionary<string, int[]>> sequences)
         {
+            //input bits increase
             int inputBits = 200;
             int numColumns = 1024;
 
+            //Code Refectoring and move HtmConfig in seperate/general class
             HtmConfig cfg = Helper.FetchHTMConfig(inputBits, numColumns);
+
+            //Remove Encoder from parameter, 
+            //because we generate encoded SDR data during fetching data from file and update sequence 
             return RunExperiment(inputBits, cfg, sequences);
         }
 
         /// <summary>
-        ///
+        /// Learning of Provided Sequence of encoded SDR
         /// </summary>
         private Predictor RunExperiment(int inputBits, HtmConfig cfg, List<Dictionary<string, int[]>> sequences)
         {
@@ -185,6 +190,7 @@ namespace ProjectMultiSequenceLearning
                             //if (previousInputs.Count < maxPrevInputs)
                             //    continue;
 
+                            // Modification to Generate Key
                             string key = GetKey(previousInputs, element, observationLabel);
 
                             List<Cell> actCells = new List<Cell>();
