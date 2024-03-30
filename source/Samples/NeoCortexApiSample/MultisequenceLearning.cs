@@ -330,7 +330,7 @@ namespace NeoCortexApiSample
 
         /// <summary>
         /// Constracts the unique key of the element of an sequece. This key is used as input for HtmClassifier.
-        /// It makes sure that alle elements that belong to the same sequence are prefixed with the sequence.
+        /// It makes sure that all elements that belong to the same sequence are prefixed with the sequence.
         /// The prediction code can then extract the sequence prefix to the predicted element.
         /// </summary>
         /// <param name="prevInputs"></param>

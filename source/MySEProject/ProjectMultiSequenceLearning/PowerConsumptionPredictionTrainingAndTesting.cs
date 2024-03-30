@@ -14,7 +14,10 @@ namespace ProjectMultiSequenceLearning
         /// <param name="testingDataFilePath"></param>
         public void RunMultiSequenceLearningExperiment(int predictionScenario, string trainingDataFilePath, string testingDataFilePath)
         {
+            //Get Sequence Data from file for training
             var trainingData = Helper.ReadSequencesDataFromCSVForPC(trainingDataFilePath);
+
+            //Encode Sequence Training Data
             var encodeTrainingData = Helper.TrainEncodeSequencesFromCSV(trainingData, predictionScenario);
 
             Console.WriteLine("Variables are being trained Please Wait....");
@@ -26,8 +29,11 @@ namespace ProjectMultiSequenceLearning
             var predictor = experiment.Run(encodeTrainingData);
 
             Console.WriteLine("Ready to Predict.....");
+
+            //Get Testing Sequence Data from file
             var testingData = Helper.ReadTestingSequencesDataFromCSV(testingDataFilePath);
 
+            //Testing Data Execute Row by Row
             foreach (var seqData in testingData)
             {
                 Console.WriteLine($"Sequence {seqData}");
@@ -54,7 +60,11 @@ namespace ProjectMultiSequenceLearning
 
             List<string> possibleModes = new List<string>();
             Console.WriteLine("------------------------------");
+            
+            //split the data by comma
             var sequenceDataList = sequenceData.Split(",");
+
+            //Every Row is Divide into single element for predict next element and calculate accuuracy
             foreach (var seqItem in sequenceDataList)
             {
                 if (first)
@@ -67,19 +77,16 @@ namespace ProjectMultiSequenceLearning
                     var elementSDR = Helper.EncodeTestingElement(prevSeqItem, predictionScenario);
                     Thread.Sleep(1000);
                     var classifierPredictions = predictor.Predict(elementSDR);
-                    //Console.WriteLine($"Classifier Predictions Count {classifierPredictions.Count}");
-                    //double lastSimilarity = 0;
+                    Console.WriteLine($"Classifier Predictions Count {classifierPredictions.Count}");
+                    
 
                     foreach (var cp in classifierPredictions)
                     {
-                        //if (cp.Similarity > lastSimilarity)
-                        //{
-                        //    lastSimilarity = cp.Similarity;
+                        
 
                         var predictedSequence = cp.PredictedInput.Split('_');
                         var predictedElements = predictedSequence.Last().Split('-');
-                        //Debug.WriteLine($"Predicted Sequence: {predictedSequence.First()}, predicted next element {predictedElements.Last()}");
-
+                        
                         if (predictedElements.Last() == seqItem)
                         {
                             Console.WriteLine($"Predicted next element: {predictedElements.Last()}");
@@ -96,24 +103,7 @@ namespace ProjectMultiSequenceLearning
                             }
                             break;
                         }
-                        // }
 
-                        //var prediction = cp.PredictedInput.Split(",");
-                        //if (prediction.First() == seqItem)
-                        //{
-                        //    Console.WriteLine($"Predicted next element: {prediction.First()}");
-                        //    matchCount++;
-
-                        //    if (prediction.Length >= 3)
-                        //    {
-                        //        possibleModes.Add(prediction[2]);
-                        //    }
-                        //    else
-                        //    {
-                        //        possibleModes.Add(prediction[1]);
-                        //    }
-                        //    break;
-                        //}
                     }
                     predictions++;
                 }
@@ -121,8 +111,20 @@ namespace ProjectMultiSequenceLearning
                 //save previous element to compare with upcoming element
                 prevSeqItem = seqItem;
             }
+
+            #region CalCulate Accuracy and Predict Mode
+
+            /*
+            * Accuracy is calculated as number of matching predictions made 
+            * divided by total number of prediction made for an element in subsequence
+            * 
+            * accuracy = number of matching predictions/total number of prediction * 100
+            */
+
             accuracy = (double)matchCount / predictions * 100;
             Console.WriteLine("------------------------------");
+
+            //Predict Mode
 
             var predictedSequenceMode = possibleModes.GroupBy(x => x.Split("_")[0])
                    .Select(g => new { possibleMode = g.Key, Count = g.Count() })
@@ -131,6 +133,8 @@ namespace ProjectMultiSequenceLearning
 
             if (predictedSequenceMode != null)
                 Console.WriteLine($"Power Consumption : {predictedSequenceMode.possibleMode}");
+
+            #endregion
 
             return accuracy;
         }

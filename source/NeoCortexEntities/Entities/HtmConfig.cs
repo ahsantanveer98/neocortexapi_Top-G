@@ -80,6 +80,11 @@ namespace NeoCortexApi.Entities
         public int NumColumns { get; set; }
 
         /// <summary>
+        /// InhibitionRadius.
+        /// </summary>
+        public int InhibitionRadius { get; set; } = 0;
+
+        /// <summary>
         /// This parameter determines the extent of the input that each column can potentially be connected to.
         /// This can be thought of as the input bits that are visible to each column, or a 'receptiveField' of
         /// the field of vision. A large enough value will result in 'global coverage', meaning that each column
@@ -402,7 +407,7 @@ namespace NeoCortexApi.Entities
             this.PotentialRadius = 15;
             this.PotentialPct = 0.75;
             this.GlobalInhibition = true;
-            //this.InhibitionRadius = 15;
+            this.InhibitionRadius = 15;
             this.LocalAreaDensity = -1.0;
             this.NumActiveColumnsPerInhArea = 0.02 * 2048;
             this.StimulusThreshold = 5.0;
@@ -490,8 +495,8 @@ namespace NeoCortexApi.Entities
                 return false;
             if (synPermConnected != obj.synPermConnected)
                 return false;
-            //if (InhibitionRadius != obj.InhibitionRadius)
-            //    return false;
+            if (InhibitionRadius != obj.InhibitionRadius)
+                return false;
             if (NumInputs != obj.NumInputs)
                 return false;
             if (NumColumns != obj.NumColumns)
@@ -620,7 +625,7 @@ namespace NeoCortexApi.Entities
             ser.SerializeValue(this.synPermActiveInc, writer);
             ser.SerializeValue(this.SynPermConnected, writer);
             //Spatial Pooler Variables
-            //ser.SerializeValue(this.InhibitionRadius, writer);
+            ser.SerializeValue(this.InhibitionRadius, writer);
             ser.SerializeValue(-1, writer);
             ser.SerializeValue(this.NumInputs, writer);
             ser.SerializeValue(this.NumColumns, writer);
@@ -753,7 +758,7 @@ namespace NeoCortexApi.Entities
                                     }
                                 case 2:
                                     {
-                                        // htmConfig.InhibitionRadius = ser.ReadIntValue(str[i]);
+                                        htmConfig.InhibitionRadius = ser.ReadIntValue(str[i]);
                                         break;
                                     }
                                 case 3:

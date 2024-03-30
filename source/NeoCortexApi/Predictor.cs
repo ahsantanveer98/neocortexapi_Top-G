@@ -57,7 +57,7 @@ namespace NeoCortexApi
         {
             var lyrOut = this.layer.Compute(input, false) as ComputeCycle;
 
-            List<ClassifierResult<string>> predictedInputValues = this.classifier.GetPredictedInputValues(lyrOut.PredictiveCells.ToArray(), 3);
+            List<ClassifierResult<string>> predictedInputValues = this.classifier.GetPredictedInputValues(lyrOut.PredictiveCells.ToArray(), 5);
 
             return predictedInputValues;
         }

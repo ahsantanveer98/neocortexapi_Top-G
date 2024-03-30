@@ -15,10 +15,13 @@ namespace ProjectMultiSequenceLearning
         public static void Main(string[] args)
         {
 
-            ProjectStarter.startingproject();
+            //Method used for printing scenario(s).
+            ProjectStarter.StartingProject();
 
+            //Get user input for scenario that want execute
             int Option = Convert.ToInt16(Console.ReadLine());
 
+            //Method run the scenario that user selected 
             ProjectStarter.UserSelection(Option);
         }
     }

@@ -8,13 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Testing Data\**" />
-    <Compile Remove="Training Data\**" />
-    <EmbeddedResource Remove="Testing Data\**" />
-    <EmbeddedResource Remove="Training Data\**" />
-    <None Remove="Testing Data\**" />
-    <None Remove="Training Data\**" />
+    <PackageReference Include="DotNetActors" Version="1.0.3" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="TestingData\" />
+    <Folder Include="TrainingData\" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\..\GridCell\GridCell.csproj" />
