@@ -351,11 +351,11 @@ We have run the experiment max possible number of times with different dataset. 
 
 ## Heart_Disease_Prediction_Result
 
-![results](./MultiSequenceLearning/Documentation/Images/HeartDiseasePredictionResult.jpeg)
+![results](./MultiSequenceLearning/Documentation/Images/HeartDiseasePredictionResult.png)
 
 ## Power_Consumption_Prediction_Result
 
-![results](./MultiSequenceLearning/Documentation/Images/PowerConsumptionPredictionResult.jpeg)
+![results](./MultiSequenceLearning/Documentation/Images/PowerConsumptionPredictionResult.jpg)
 
 ## Reference
 
