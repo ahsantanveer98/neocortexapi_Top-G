@@ -9,7 +9,7 @@ namespace ProjectMultiSequenceLearning
     public class ProjectStarter
     {
         /// <summary>
-        /// Training File Paths For Sequences
+        /// Training and Testing File(s) Path For Sequence(s).
         /// </summary>
         ///
 #pragma warning disable CS8602 //disable the warning 
@@ -28,11 +28,11 @@ namespace ProjectMultiSequenceLearning
         /// Print Message During Startup of Program
         /// </summary>
         /// <param name="None"></param>
-        public static void startingproject()
+        public static void StartingProject()
         {
             Console.WriteLine("\n");
-            // Set the Foreground color to White
-            Console.ForegroundColor = ConsoleColor.White;
+            // Set the Foreground color to Dark Green
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("######## ########    ###    ##     ##    ########   ####     #########             ######    ");
             Console.WriteLine("   ##    ##         ## ##   ###   ###       ##     ##  ##    ##      ##           ##         ");
             Console.WriteLine("   ##    ##        ##   ##  #### ####       ##    ##    ##   ##      ##          ##         ");
@@ -43,23 +43,23 @@ namespace ProjectMultiSequenceLearning
 
             Console.WriteLine("\n\n\n");
 
-            // Set the Foreground color to Dark Yellow
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            // Set the Foreground color to black
+            Console.ForegroundColor = ConsoleColor.Black;
 
-            Console.WriteLine("**************          Approve Prediction of Multi Sequence Learning               ************** \n ");
-            Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction     ************** ");
-            Console.WriteLine("**************  Scenario - 2 - Power_Consumption_Prediction   ************** ");
+            Console.WriteLine("************   ML-23/24-09   Approve Prediction of Multi Sequence Learning    ************** \n ");
+            Console.WriteLine("**************  Scenario - 1 - Cancer_Prediction             ************** ");
+            Console.WriteLine("**************  Scenario - 2 - Power_Consumption_Prediction  ************** ");
             Console.WriteLine("**************  Scenario - 3 - Heart_Disease_Prediction      ************** ");
 
             Console.WriteLine("\n");
             Console.WriteLine("Please Enter A Scenario Number to Continue with MultiSequence Experiment");
 
-            // Set the Foreground color to White
-            Console.ForegroundColor = ConsoleColor.White;
+            // Set the Foreground color to black
+            Console.ForegroundColor = ConsoleColor.Black;
         }
 
         /// <summary>
-        /// Print Message During Startup of Program
+        /// Run Multi Sequence Learning of user selected Scenario
         /// </summary>
         /// <param name="UserInput"></param>
 
